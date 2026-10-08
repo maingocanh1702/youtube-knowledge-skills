@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.2.0] - 2026-10-08
+
+### Added
+- **`youtube-knowledge-learner-vi-en` (v1.0.0)**: the original compact Vietnamese + English mixed-language skill, brought up to the Claude skill format. It bundles its own `fetch_youtube_knowledge.py` and a self-contained `md2html.py` (sticky TOC with scroll-spy, dark mode, callouts, Mermaid, print/PDF), so it runs without any external skill.
+- New archives `packages/youtube-knowledge-learner-vi-en.skill` and `packages/youtube-knowledge-learner-vi-en-v1.0.0.skill`.
+
+### Fixed
+- Frontmatter of `youtube-knowledge-learner-vi-en` was invalid YAML (unquoted `: ` in the description); it now uses a folded block scalar and a `metadata.version` field.
+
+### Changed
+- The description now points users to `youtube-knowledge-vi-en` when they need the two-part bilingual edition, to reduce overlap between the two skills.
+
+## [v2.1.1] - 2026-10-08
+
+### Changed
+- **Claude compatibility**: moved `version` and `keywords` into the `metadata` block of every `SKILL.md` frontmatter, so the skills pass Claude's skill validation and can be uploaded to Claude.ai / Claude Desktop / Cowork or dropped into `~/.claude/skills` for Claude Code. Versions: `youtube-knowledge-vi-en` 2.1.1, `youtube-knowledge-vi` 1.0.1, `youtube-knowledge-en` 1.0.1.
+- Removed machine-specific `file:///Users/...` links and the Antigravity-only `<SKILL_DIR>` path from the skill instructions; `<SKILL_DIR>` now documents Claude Code, Claude.ai and Cowork locations.
+- Added guidance for sandboxed environments without Chrome cookies (`--cookies-from-browser none`, paste transcript as a fallback).
+- Rebuilt every archive in `packages/` from the updated sources.
+- README: added install instructions for Claude, Codex / ChatGPT, plus a references and credits section.
+
 ## [v2.1.0] - 2026-10-08
 
 ### Added

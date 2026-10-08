@@ -1,6 +1,6 @@
 # YouTube Knowledge Skills Suite 🎓
 
-[![Release](https://img.shields.io/badge/release-v2.1.0-blue.svg)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/release-v2.2.0-blue.svg)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Antigravity](https://img.shields.io/badge/Platform-Antigravity%20%7C%20Claude%20%7C%20AI%20Agents-green.svg)](#installation)
 
@@ -10,13 +10,14 @@
 
 ## 🌟 Tổng Quan 3 Phiên Bản (The Triad Suite)
 
-Bộ kỹ năng được thiết kế theo 3 phân hệ ngôn ngữ riêng biệt để đáp ứng mọi nhu cầu nghiên cứu, học tập và triển khai thực chiến:
+Bộ kỹ năng gồm 3 phân hệ ngôn ngữ chính (kèm 1 bản gọn) để đáp ứng mọi nhu cầu nghiên cứu, học tập và triển khai thực chiến:
 
 | Skill | Mục đích & Đặc thù | Ngôn ngữ | HTML Compiler Đi Kèm |
 | :--- | :--- | :--- | :--- |
 | **`youtube-knowledge-vi-en`** | **Bản Song Ngữ Tương Tác cao cấp nhất**. Cấu trúc 2 Part độc lập: Part 1 (Tiếng Việt giữ nguyên 100% thuật ngữ tiếng Anh) và Part 2 (Full English Technical Reference). | 🇻🇳 VI ⇋ 🇬🇧 EN | ✅ Nút đổi ngôn ngữ tức thì, Dual TOC, Bento + Mermaid cả 2 ngôn ngữ |
 | **`youtube-knowledge-vi`** | **Bản Thuần Tiếng Việt**. Dịch 100% tất cả thuật ngữ kinh doanh/quản trị sang tiếng Việt (*career growth* → thăng tiến sự nghiệp, *talent bar* → chuẩn nhân sự). | 🇻🇳 Tiếng Việt thuần | ✅ Standalone Single-Lang HTML Compiler |
 | **`youtube-knowledge-en`** | **Bản Full English Technical Reference**. Chưng cất 100% tiếng Anh chuẩn kỹ thuật toàn diện, phục vụ tra cứu quốc tế và làm system prompt cho AI Agents. | 🇬🇧 English | ✅ Standalone Single-Lang HTML Compiler |
+| **`youtube-knowledge-learner-vi-en`** | **Bản gọn một ngôn ngữ (Việt trộn Anh)**. Giữ nguyên thuật ngữ tiếng Anh, tự lấy transcript và chuyển sang HTML bằng `md2html.py` đi kèm. Dùng khi chỉ cần ghi chú nhanh, không cần 2 phần song ngữ. | 🇻🇳🇬🇧 Trộn Việt + Anh | ✅ `md2html.py` đi kèm (TOC, dark mode, Mermaid) |
 
 ---
 
@@ -68,14 +69,53 @@ mkdir -p .agents/skills
 cp -r skills/* .agents/skills/
 ```
 
-### Cách 2: Nhập Bằng File Đóng Gói `.skill`
+### Cách 2: Dùng cho Claude
+
+Các skill đã được chuẩn hóa frontmatter (`name`, `description`, `metadata`) để vượt qua bộ kiểm tra của Claude.
+
+**Claude.ai / Claude Desktop / Cowork**
+
+1. Vào **Settings → Capabilities** và bật *Code execution and file creation*.
+2. Vào **Customize → Skills → `+` → Upload a skill**.
+3. Chọn file trong [`packages/`](packages/), mỗi lần một skill (nếu giao diện không nhận đuôi `.skill`, đổi đuôi thành `.zip`).
+
+**Claude Code (terminal)**
+
+```bash
+# Toàn cục
+mkdir -p ~/.claude/skills
+cp -r skills/* ~/.claude/skills/
+
+# Hoặc cho riêng một dự án
+mkdir -p .claude/skills
+cp -r skills/* .claude/skills/
+```
+
+> **Lưu ý khi chạy trong Claude.ai / Cowork:** môi trường này không có trình duyệt nên không có cookie Chrome. Hãy chạy script với `--cookies-from-browser none`; nếu YouTube vẫn chặn, hãy dán transcript cho Claude để làm tiếp.
+
+### Cách 3: Dùng cho Codex / ChatGPT (OpenAI)
+
+Codex đọc cùng định dạng `SKILL.md`:
+
+```bash
+mkdir -p ~/.agents/skills        # dùng cho mọi dự án
+cp -r skills/* ~/.agents/skills/
+
+# hoặc riêng cho repo hiện tại
+mkdir -p .agents/skills
+cp -r skills/* .agents/skills/
+```
+
+Codex tự phát hiện skill mới (khởi động lại nếu chưa thấy), gọi bằng `$` hoặc `/skills`. Với ứng dụng ChatGPT, OpenAI hiện hướng dẫn tạo skill bằng `@skill-creator` hoặc đóng gói thành plugin; chưa có bước tải lên thư mục/ZIP trực tiếp.
+
+### Cách 4: Nhập Bằng File Đóng Gói `.skill`
 
 Các file đóng gói sẵn nằm trong thư mục [`packages/`](packages/):
 * 📦 [`packages/youtube-knowledge-vi-en.skill`](packages/youtube-knowledge-vi-en.skill) *(Bản song ngữ)*
 * 📦 [`packages/youtube-knowledge-vi.skill`](packages/youtube-knowledge-vi.skill) *(Bản thuần Việt)*
 * 📦 [`packages/youtube-knowledge-en.skill`](packages/youtube-knowledge-en.skill) *(Bản thuần Anh)*
 
-Chỉ cần giải nén hoặc kéo thả vào thư mục `skills` của trợ lý AI bạn đang sử dụng.
+Giải nén hoặc kéo thả vào thư mục `skills` của trợ lý AI bạn đang sử dụng.
 
 ---
 
@@ -109,13 +149,15 @@ python3 skills/youtube-knowledge-en/scripts/build_html.py "output/note.md" --lan
 youtube-knowledge-skills/
 ├── packages/                             # File nén .skill sẵn sàng import/cài đặt
 │   ├── youtube-knowledge-vi-en.skill
-│   ├── youtube-knowledge-vi-en-v2.1.0.skill
+│   ├── youtube-knowledge-vi-en-v2.1.1.skill
 │   ├── youtube-knowledge-vi.skill
-│   ├── youtube-knowledge-vi-v1.0.0.skill
+│   ├── youtube-knowledge-vi-v1.0.1.skill
 │   ├── youtube-knowledge-en.skill
-│   └── youtube-knowledge-en-v1.0.0.skill
+│   ├── youtube-knowledge-en-v1.0.1.skill
+│   ├── youtube-knowledge-learner-vi-en.skill
+│   └── youtube-knowledge-learner-vi-en-v1.0.0.skill
 ├── skills/                               # Mã nguồn chi tiết từng skill
-│   ├── youtube-knowledge-vi-en/          # Skill Song ngữ tương tác (v2.1.0)
+│   ├── youtube-knowledge-vi-en/          # Skill Song ngữ tương tác (v2.1.1)
 │   │   ├── SKILL.md
 │   │   ├── references/system-map-template.md
 │   │   └── scripts/
@@ -124,7 +166,7 @@ youtube-knowledge-skills/
 │   │       ├── flow_viewer.py
 │   │       ├── md_render.py
 │   │       └── template.html
-│   ├── youtube-knowledge-vi/             # Skill Thuần tiếng Việt (v1.0.0)
+│   ├── youtube-knowledge-vi/             # Skill Thuần tiếng Việt (v1.0.1)
 │   │   ├── SKILL.md
 │   │   ├── references/system-map-template.md
 │   │   └── scripts/
@@ -133,15 +175,20 @@ youtube-knowledge-skills/
 │   │       ├── flow_viewer.py
 │   │       ├── md_render.py
 │   │       └── template.html
-│   └── youtube-knowledge-en/             # Skill Thuần tiếng Anh (v1.0.0)
+│   ├── youtube-knowledge-en/             # Skill Thuần tiếng Anh (v1.0.1)
+│   │   ├── SKILL.md
+│   │   ├── references/system-map-template.md
+│   │   └── scripts/
+│   │       ├── fetch_youtube_knowledge.py
+│   │       ├── build_html.py
+│   │       ├── flow_viewer.py
+│   │       ├── md_render.py
+│   │       └── template.html
+│   └── youtube-knowledge-learner-vi-en/  # Skill bản gọn Việt + Anh (v1.0.0)
 │       ├── SKILL.md
-│       ├── references/system-map-template.md
 │       └── scripts/
 │           ├── fetch_youtube_knowledge.py
-│           ├── build_html.py
-│           ├── flow_viewer.py
-│           ├── md_render.py
-│           └── template.html
+│           └── md2html.py
 ├── CHANGELOG.md                          # Lịch sử cập nhật phiên bản
 ├── LICENSE                               # Giấy phép MIT
 ├── README.md                             # Hướng dẫn chi tiết
@@ -164,6 +211,16 @@ youtube-knowledge-skills/
   ```bash
   pip install --user youtube-transcript-api
   ```
+
+---
+
+## 🙏 Nguồn Tham Khảo & Ghi Nhận
+
+- **Molly Graham Benchmark**: chuẩn chất lượng tự đặt của dự án, lấy từ ba ghi chú mẫu viết từ các cuộc phỏng vấn với Molly Graham, Peter Deng và Ian Silber.
+- [`yt-dlp`](https://github.com/yt-dlp/yt-dlp): tải phụ đề và metadata video.
+- [`youtube-transcript-api`](https://github.com/jdepoix/youtube-transcript-api): lấy transcript dự phòng.
+- [Mermaid](https://mermaid.js.org/): vẽ sơ đồ luồng trong phần System Map.
+- [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) và [Semantic Versioning](https://semver.org/spec/v2.0.0.html): quy ước cho `CHANGELOG.md` và đánh số phiên bản.
 
 ---
 

@@ -6,8 +6,9 @@ description: >-
   Chỉ giữ nguyên thuật ngữ kỹ thuật cứng (API, Docker, Kubernetes...) và tên riêng.
   Kích hoạt khi người dùng cung cấp URL YouTube và muốn ghi chú kiến thức thuần Việt.
   Nếu cần giữ thuật ngữ chuyên ngành tiếng Anh, dùng skill youtube-knowledge-vi-en.
-version: 1.0.0
-keywords: [youtube, tiếng việt, vietnamese, pure, vi, transcript, ghi chú, markdown, knowledge]
+metadata:
+  version: "1.0.1"
+  keywords: [youtube, tiếng việt, vietnamese, pure, vi, transcript, ghi chú, markdown, knowledge]
 ---
 
 # YouTube Knowledge Learner — Bản Thuần Tiếng Việt
@@ -105,7 +106,8 @@ python3 "<SKILL_DIR>/scripts/fetch_youtube_knowledge.py" "<YOUTUBE_URL>" \
 ```
 
 Trong đó:
-- `<SKILL_DIR>` = thư mục chứa skill này (thường là `~/.gemini/config/skills/youtube-knowledge-vi`)
+- `<SKILL_DIR>` = thư mục chứa skill này (Claude Code: `~/.claude/skills/youtube-knowledge-vi` hoặc `.claude/skills/youtube-knowledge-vi`; Claude.ai / Cowork: thư mục skill được mount cho phiên, hãy dùng đường dẫn thực tế của skill)
+- **Khi chạy trong Claude.ai / Cowork** (không có cookie Chrome): dùng `--cookies-from-browser none`; nếu bị chặn thì nhờ người dùng dán transcript.
 - `<OUTPUT_DIR>` = thư mục xuất, mặc định `knowledge/youtube` relative to project root
 - `--cookies-from-browser chrome` = dùng cookies Chrome để auth (giảm rate-limit)
 - `--task` = mô tả tác vụ, tuỳ chọn
@@ -135,7 +137,7 @@ Chỉ dùng khi script không chạy được (vd: sandbox chặn network). Ghi 
 
 ## Cấu trúc đầu ra chuẩn mực — TIÊU CHUẨN VÀNG (Molly Graham Benchmark)
 
-> **QUY TẮC BẮT BUỘC**: Mọi bản tóm tắt tạo bởi skill này PHẢI áp dụng **Tiêu Chuẩn Vàng (Gold Standard Benchmark)** tương đương bản tham chiếu mẫu [Molly Graham](file:///Users/maingocanh/Projects/Youtube%20Learner/knowledge/youtube/molly-graham-the-grief-burnout-and-opportunity-hiding-inside-the-ai-transition.html). Không được phép tạo bản tóm tắt sơ sài, chung chung hoặc chỉ có H2 phẳng.
+> **QUY TẮC BẮT BUỘC**: Mọi bản tóm tắt tạo bởi skill này PHẢI áp dụng **Tiêu Chuẩn Vàng (Gold Standard Benchmark)** tương đương bản tham chiếu mẫu Molly Graham. Không được phép tạo bản tóm tắt sơ sài, chung chung hoặc chỉ có H2 phẳng.
 
 Mỗi tài liệu Markdown PHẢI có cấu trúc tối thiểu **10 Phân Hệ Chuyên Sâu** với độ dài từ **8.000 – 12.000 từ** (khoảng 35–45 KB Markdown), bao gồm:
 

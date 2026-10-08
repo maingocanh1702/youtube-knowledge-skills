@@ -5,11 +5,12 @@ description: >-
   Part 1 (Tiếng Việt chuyên sâu, giữ nguyên 100% thuật ngữ chuyên ngành tiếng Anh) và Part 2 (Full English Technical Reference).
   Tự động xuất file HTML tương tác có nút chuyển đổi ngôn ngữ tức thì, 2 mục lục (TOC) độc lập, và Dual-Mode Visualizer (Bento + Mermaid)
   chuẩn mực cho cả 2 ngôn ngữ. Kích hoạt khi người dùng cung cấp URL YouTube hoặc yêu cầu học từ video.
-version: 2.1.0
-keywords: [youtube, tiếng việt, english, song ngữ, bilingual, mixed, vi-en, transcript, ghi chú, markdown, interactive html, bento, mermaid, knowledge]
+metadata:
+  version: "2.1.1"
+  keywords: [youtube, tiếng việt, english, song ngữ, bilingual, mixed, vi-en, transcript, ghi chú, markdown, interactive html, bento, mermaid, knowledge]
 ---
 
-# YouTube Knowledge Learner — Bản Song Ngữ Tương Tác Cao Cấp (vi-en v2.0)
+# YouTube Knowledge Learner — Bản Song Ngữ Tương Tác Cao Cấp (vi-en v2.1)
 
 Sử dụng skill này để biến một video YouTube thành một kho tri thức tham khảo chuẩn mực hàng đầu **song ngữ hoàn chỉnh (Bilingual Dual-Language Architecture)**:
 
@@ -82,6 +83,8 @@ python3 "<SKILL_DIR>/scripts/fetch_youtube_knowledge.py" "<YOUTUBE_URL>" \
   --task "<mô tả tác vụ nếu có>"
 ```
 
+- `<SKILL_DIR>` = thư mục chứa skill này (Claude Code: `~/.claude/skills/youtube-knowledge-vi-en` hoặc `.claude/skills/youtube-knowledge-vi-en`; Claude.ai / Cowork: thư mục skill được mount cho phiên, dùng đường dẫn thực tế của skill).
+- **Khi chạy trong Claude.ai / Cowork** (sandbox không có trình duyệt, không có cookie Chrome): đổi thành `--cookies-from-browser none`. Nếu YouTube chặn, script tự fallback sang `youtube-transcript-api`; nếu vẫn thất bại, nhờ người dùng dán transcript hoặc đính kèm file transcript rồi truyền đường dẫn file đó vào thay cho URL.
 - Mặc định dùng `yt-dlp` với cookie từ Chrome để tránh rate-limit HTTP 429.
 - Tự động fallback sang `youtube-transcript-api` nếu `yt-dlp` gặp trở ngại.
 - Script tạo scaffold tài liệu song ngữ 10 phân hệ tại `knowledge/youtube/<slug>.md`.
@@ -90,7 +93,7 @@ python3 "<SKILL_DIR>/scripts/fetch_youtube_knowledge.py" "<YOUTUBE_URL>" \
 
 ## 3. Cấu trúc đầu ra chuẩn mực — TIÊU CHUẨN VÀNG (Molly Graham Benchmark)
 
-> **QUY TẮC BẮT BUỘC**: Mọi tài liệu tạo bởi skill này PHẢI áp dụng **Tiêu Chuẩn Vàng (Gold Standard Benchmark)** tương đương các tài liệu mẫu [Molly Graham](file:///Users/maingocanh/Projects/Youtube%20Learner/knowledge/youtube/molly-graham-the-grief-burnout-and-opportunity-hiding-inside-the-ai-transition.html), [Peter Deng](file:///Users/maingocanh/Projects/Youtube%20Learner/knowledge/youtube/the-one-thing-a-legendary-pm-optimized-for-peter-deng.html), và [Ian Silber](file:///Users/maingocanh/Projects/Youtube%20Learner/knowledge/youtube/chatbots-are-not-the-final-interface-openai-s-head-of-design-on-what-s-next-ian-.html).
+> **QUY TẮC BẮT BUỘC**: Mọi tài liệu tạo bởi skill này PHẢI áp dụng **Tiêu Chuẩn Vàng (Gold Standard Benchmark)** tương đương các tài liệu mẫu Molly Graham, Peter Deng, và Ian Silber.
 > Tổng dung lượng Markdown đạt từ **70–100 KB** (khoảng **8.000 – 12.000 từ** cho cả 2 phần), HTML hoàn thiện đạt từ **130–170 KB**.
 
 Tài liệu Markdown được tổ chức thành 2 phần rõ rệt:

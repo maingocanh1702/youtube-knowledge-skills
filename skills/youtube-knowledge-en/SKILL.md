@@ -5,8 +5,9 @@ description: >-
   10-section deep architectural and conceptual knowledge notes strictly in English. Adheres to the
   Gold Standard (Molly Graham Benchmark) with Dual-Mode Visualizer (Bento + Mermaid) and interactive
   HTML export. Trigger when the user wants pure English notes from a YouTube video.
-version: 1.0.0
-keywords: [youtube, english, pure english, reference, transcript, notes, markdown, interactive html, bento, mermaid, knowledge]
+metadata:
+  version: "1.0.1"
+  keywords: [youtube, english, pure english, reference, transcript, notes, markdown, interactive html, bento, mermaid, knowledge]
 ---
 
 # YouTube Knowledge Learner — Full English Technical Reference
@@ -40,7 +41,8 @@ python3 "<SKILL_DIR>/scripts/fetch_youtube_knowledge.py" "<YOUTUBE_URL>" \
 ```
 
 Where:
-- `<SKILL_DIR>` = `~/.gemini/config/skills/youtube-knowledge-en`
+- `<SKILL_DIR>` = thư mục chứa skill này (Claude Code: `~/.claude/skills/youtube-knowledge-en` hoặc `.claude/skills/youtube-knowledge-en`; Claude.ai / Cowork: thư mục skill được mount cho phiên, hãy dùng đường dẫn thực tế của skill)
+- **When running in Claude.ai / Cowork** (no Chrome cookies available): use `--cookies-from-browser none`; if YouTube blocks the request, ask the user to paste the transcript.
 - `<OUTPUT_DIR>` = `knowledge/youtube` relative to project root
 - `--cookies-from-browser chrome` = uses Chrome session cookies to mitigate YouTube 429 rate-limiting.
 - Script returns JSON metadata: `note`, `transcript`, `title`, `source`, `language`, `segments`, `path_used`.
