@@ -1,12 +1,12 @@
 ---
-name: youtube-knowledge-learner-vi-en
+name: youtube-knowledge-vi-en-lite
 description: >-
   Biến video YouTube thành ghi chú Markdown TRỘN tiếng Việt + tiếng Anh. Giữ NGUYÊN tất cả thuật ngữ chuyên
   ngành tiếng Anh (career growth, talent bar, feedback, trade-off, ecosystem...), chỉ dịch nội dung chính sang
   tiếng Việt. Kích hoạt khi người dùng cung cấp URL YouTube và muốn "học video YouTube bản vi-en", tóm tắt /
   dịch / tạo ghi chú từ video bằng tiếng Việt. Skill độc lập: tự lấy transcript bằng script đi kèm (yt-dlp +
   fallback), không cần MCP server. Đầu ra Markdown trộn VN+EN, tự động chain sang HTML bằng script đi kèm
-  scripts/md2html.py. Đây là bản gọn một ngôn ngữ trộn Việt + Anh; nếu cần bản song ngữ 2 phần có nút chuyển
+  scripts/md2html.py. Đây là bản LITE (gọn) một ngôn ngữ trộn Việt + Anh; nếu cần bản song ngữ 2 phần có nút chuyển
   ngôn ngữ thì dùng skill youtube-knowledge-vi-en.
 metadata:
   version: "1.0.0"
@@ -105,7 +105,7 @@ python3 "<SKILL_DIR>/scripts/fetch_youtube_knowledge.py" "<URL>" \
   --cookies-from-browser chrome
 ```
 
-> **Khi chạy trong Claude.ai / Cowork** (sandbox không có trình duyệt nên không có cookie Chrome): đổi thành `--cookies-from-browser none`. Nếu YouTube vẫn chặn, script tự fallback sang `youtube-transcript-api`; nếu thất bại nữa, nhờ người dùng dán transcript rồi làm tiếp từ bước viết ghi chú. Trên Claude Code, `<SKILL_DIR>` thường là `~/.claude/skills/youtube-knowledge-learner-vi-en`.
+> **Khi chạy trong Claude.ai / Cowork** (sandbox không có trình duyệt nên không có cookie Chrome): đổi thành `--cookies-from-browser none`. Nếu YouTube vẫn chặn, script tự fallback sang `youtube-transcript-api`; nếu thất bại nữa, nhờ người dùng dán transcript rồi làm tiếp từ bước viết ghi chú. Trên Claude Code, `<SKILL_DIR>` thường là `~/.claude/skills/youtube-knowledge-vi-en-lite`.
 
 Tham số:
 

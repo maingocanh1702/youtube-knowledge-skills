@@ -8,16 +8,16 @@
 
 ---
 
-## 🌟 Tổng Quan 3 Phiên Bản (The Triad Suite)
+## 🌟 Tổng Quan 4 Phiên Bản (Triad Suite + Lite)
 
-Bộ kỹ năng gồm 3 phân hệ ngôn ngữ chính (kèm 1 bản gọn) để đáp ứng mọi nhu cầu nghiên cứu, học tập và triển khai thực chiến:
+Bộ kỹ năng gồm 3 phân hệ ngôn ngữ chính cùng 1 bản lite gọn nhẹ để đáp ứng mọi nhu cầu nghiên cứu, học tập và triển khai thực chiến:
 
 | Skill | Mục đích & Đặc thù | Ngôn ngữ | HTML Compiler Đi Kèm |
 | :--- | :--- | :--- | :--- |
 | **`youtube-knowledge-vi-en`** | **Bản Song Ngữ Tương Tác cao cấp nhất**. Cấu trúc 2 Part độc lập: Part 1 (Tiếng Việt giữ nguyên 100% thuật ngữ tiếng Anh) và Part 2 (Full English Technical Reference). | 🇻🇳 VI ⇋ 🇬🇧 EN | ✅ Nút đổi ngôn ngữ tức thì, Dual TOC, Bento + Mermaid cả 2 ngôn ngữ |
 | **`youtube-knowledge-vi`** | **Bản Thuần Tiếng Việt**. Dịch 100% tất cả thuật ngữ kinh doanh/quản trị sang tiếng Việt (*career growth* → thăng tiến sự nghiệp, *talent bar* → chuẩn nhân sự). | 🇻🇳 Tiếng Việt thuần | ✅ Standalone Single-Lang HTML Compiler |
 | **`youtube-knowledge-en`** | **Bản Full English Technical Reference**. Chưng cất 100% tiếng Anh chuẩn kỹ thuật toàn diện, phục vụ tra cứu quốc tế và làm system prompt cho AI Agents. | 🇬🇧 English | ✅ Standalone Single-Lang HTML Compiler |
-| **`youtube-knowledge-learner-vi-en`** | **Bản gọn một ngôn ngữ (Việt trộn Anh)**. Giữ nguyên thuật ngữ tiếng Anh, tự lấy transcript và chuyển sang HTML bằng `md2html.py` đi kèm. Dùng khi chỉ cần ghi chú nhanh, không cần 2 phần song ngữ. | 🇻🇳🇬🇧 Trộn Việt + Anh | ✅ `md2html.py` đi kèm (TOC, dark mode, Mermaid) |
+| **`youtube-knowledge-vi-en-lite`** | **Bản Lite (Việt trộn Anh)**. Giữ nguyên thuật ngữ tiếng Anh, tự lấy transcript và chuyển sang HTML bằng `md2html.py` đi kèm. Dùng khi chỉ cần ghi chú nhanh, không cần 2 phần song ngữ. | 🇻🇳🇬🇧 Trộn Việt + Anh | ✅ `md2html.py` đi kèm (TOC, dark mode, Mermaid) |
 
 ---
 
@@ -154,8 +154,8 @@ youtube-knowledge-skills/
 │   ├── youtube-knowledge-vi-v1.0.1.skill
 │   ├── youtube-knowledge-en.skill
 │   ├── youtube-knowledge-en-v1.0.1.skill
-│   ├── youtube-knowledge-learner-vi-en.skill
-│   └── youtube-knowledge-learner-vi-en-v1.0.0.skill
+│   ├── youtube-knowledge-vi-en-lite.skill
+│   └── youtube-knowledge-vi-en-lite-v1.0.0.skill
 ├── skills/                               # Mã nguồn chi tiết từng skill
 │   ├── youtube-knowledge-vi-en/          # Skill Song ngữ tương tác (v2.1.1)
 │   │   ├── SKILL.md
@@ -184,7 +184,7 @@ youtube-knowledge-skills/
 │   │       ├── flow_viewer.py
 │   │       ├── md_render.py
 │   │       └── template.html
-│   └── youtube-knowledge-learner-vi-en/  # Skill bản gọn Việt + Anh (v1.0.0)
+│   └── youtube-knowledge-vi-en-lite/  # Skill Lite Việt + Anh (v1.0.0)
 │       ├── SKILL.md
 │       └── scripts/
 │           ├── fetch_youtube_knowledge.py
@@ -217,6 +217,7 @@ youtube-knowledge-skills/
 ## 🙏 Nguồn Tham Khảo & Ghi Nhận
 
 - **Molly Graham Benchmark**: chuẩn chất lượng tự đặt của dự án, lấy từ ba ghi chú mẫu viết từ các cuộc phỏng vấn với Molly Graham, Peter Deng và Ian Silber.
+- [`longmaba/youtube-knowledge-learner`](https://github.com/longmaba/youtube-knowledge-learner): skill gốc bằng tiếng Anh mà bản Lite (`youtube-knowledge-vi-en-lite`) được tách ra và phát triển từ đó. Mình chưa thấy file giấy phép ở repo này, nên hãy kiểm tra lại điều khoản trước khi phát hành rộng.
 - [`yt-dlp`](https://github.com/yt-dlp/yt-dlp): tải phụ đề và metadata video.
 - [`youtube-transcript-api`](https://github.com/jdepoix/youtube-transcript-api): lấy transcript dự phòng.
 - [Mermaid](https://mermaid.js.org/): vẽ sơ đồ luồng trong phần System Map.

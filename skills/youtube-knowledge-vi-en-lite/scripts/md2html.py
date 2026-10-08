@@ -5,7 +5,7 @@ md2html.py — chuyển một file Markdown sang HTML self-contained theo templa
 "Notes" (phong cách Anthropic): TOC sticky + scroll-spy, dark-mode toggle,
 scroll progress, callout, timeline (qua list), mermaid, collapsible, in/PDF.
 
-Đây là bản md2html ĐƯỢC ĐÓNG GÓI KÈM skill youtube-knowledge-learner-vi-en để
+Đây là bản md2html ĐƯỢC ĐÓNG GÓI KÈM skill youtube-knowledge-vi-en-lite để
 bước "chain sang HTML" chạy tự động, KHÔNG phụ thuộc một skill md2html riêng.
 
 Cách dùng:

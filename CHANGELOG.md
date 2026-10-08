@@ -9,11 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v2.2.0] - 2026-10-08
 
 ### Added
-- **`youtube-knowledge-learner-vi-en` (v1.0.0)**: the original compact Vietnamese + English mixed-language skill, brought up to the Claude skill format. It bundles its own `fetch_youtube_knowledge.py` and a self-contained `md2html.py` (sticky TOC with scroll-spy, dark mode, callouts, Mermaid, print/PDF), so it runs without any external skill.
-- New archives `packages/youtube-knowledge-learner-vi-en.skill` and `packages/youtube-knowledge-learner-vi-en-v1.0.0.skill`.
+- **`youtube-knowledge-vi-en-lite` (v1.0.0)**: the compact Vietnamese + English mixed-language skill (renamed from `youtube-knowledge-learner-vi-en`, derived from the English skill at github.com/longmaba/youtube-knowledge-learner), brought up to the Claude skill format. It bundles its own `fetch_youtube_knowledge.py` and a self-contained `md2html.py` (sticky TOC with scroll-spy, dark mode, callouts, Mermaid, print/PDF), so it runs without any external skill.
+- New archives `packages/youtube-knowledge-vi-en-lite.skill` and `packages/youtube-knowledge-vi-en-lite-v1.0.0.skill`.
 
 ### Fixed
-- Frontmatter of `youtube-knowledge-learner-vi-en` was invalid YAML (unquoted `: ` in the description); it now uses a folded block scalar and a `metadata.version` field.
+- Frontmatter of `youtube-knowledge-vi-en-lite` was invalid YAML (unquoted `: ` in the description); it now uses a folded block scalar and a `metadata.version` field.
 
 ### Changed
 - The description now points users to `youtube-knowledge-vi-en` when they need the two-part bilingual edition, to reduce overlap between the two skills.
