@@ -2,9 +2,11 @@
 
 [![Release](https://img.shields.io/badge/release-v2.2.0-blue.svg)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Antigravity](https://img.shields.io/badge/Platform-Antigravity%20%7C%20Claude%20%7C%20AI%20Agents-green.svg)](#installation)
+[![Platform](https://img.shields.io/badge/Platform-Claude%20%7C%20Codex%20%7C%20Antigravity%20%7C%20AI%20Agents-green.svg)](#-cài-đặt-installation)
 
-> **Bộ 3 AI Agent Skills cao cấp biến video YouTube thành kho tri thức kỹ thuật & chiến lược chuyên sâu theo Tiêu Chuẩn Vàng (Molly Graham Benchmark).**
+> **Bộ AI Agent Skills cao cấp biến video YouTube thành kho tri thức kỹ thuật & chiến lược chuyên sâu theo Tiêu Chuẩn Vàng (Molly Graham Benchmark).**
+
+[🇬🇧 English](README.en.md) · **🇻🇳 Tiếng Việt**
 
 ---
 
@@ -53,7 +55,7 @@ Không tạo bản tóm tắt sơ sài, chung chung. Mỗi tài liệu Markdown 
 
 ## 🚀 Cài Đặt (Installation)
 
-### Cách 1: Dùng cho Google Antigravity IDE (Khuyên Dùng)
+### Cách 1: Dùng cho Google Antigravity IDE
 
 Copy các thư mục skill từ `skills/` vào thư mục cấu hình toàn cục:
 
@@ -114,6 +116,7 @@ Các file đóng gói sẵn nằm trong thư mục [`packages/`](packages/):
 * 📦 [`packages/youtube-knowledge-vi-en.skill`](packages/youtube-knowledge-vi-en.skill) *(Bản song ngữ)*
 * 📦 [`packages/youtube-knowledge-vi.skill`](packages/youtube-knowledge-vi.skill) *(Bản thuần Việt)*
 * 📦 [`packages/youtube-knowledge-en.skill`](packages/youtube-knowledge-en.skill) *(Bản thuần Anh)*
+* 📦 [`packages/youtube-knowledge-vi-en-lite.skill`](packages/youtube-knowledge-vi-en-lite.skill) *(Bản Lite, Việt trộn Anh)*
 
 Giải nén hoặc kéo thả vào thư mục `skills` của trợ lý AI bạn đang sử dụng.
 
@@ -191,7 +194,8 @@ youtube-knowledge-skills/
 │           └── md2html.py
 ├── CHANGELOG.md                          # Lịch sử cập nhật phiên bản
 ├── LICENSE                               # Giấy phép MIT
-├── README.md                             # Hướng dẫn chi tiết
+├── README.md                             # Hướng dẫn chi tiết (tiếng Việt)
+├── README.en.md                          # English version
 └── .gitignore                            # Quy tắc bỏ qua file rác
 ```
 
@@ -217,7 +221,7 @@ youtube-knowledge-skills/
 ## 🙏 Nguồn Tham Khảo & Ghi Nhận
 
 - **Molly Graham Benchmark**: chuẩn chất lượng tự đặt của dự án, lấy từ ba ghi chú mẫu viết từ các cuộc phỏng vấn với Molly Graham, Peter Deng và Ian Silber.
-- [`longmaba/youtube-knowledge-learner`](https://github.com/longmaba/youtube-knowledge-learner): skill gốc bằng tiếng Anh mà bản Lite (`youtube-knowledge-vi-en-lite`) được tách ra và phát triển từ đó. Mình chưa thấy file giấy phép ở repo này, nên hãy kiểm tra lại điều khoản trước khi phát hành rộng.
+- [`longmaba/youtube-knowledge-learner`](https://github.com/longmaba/youtube-knowledge-learner): skill gốc bằng tiếng Anh mà bản Lite (`youtube-knowledge-vi-en-lite`) được tách ra và phát triển từ đó. Repo này chưa hiển thị file giấy phép, nên hãy kiểm tra lại điều khoản trước khi phát hành rộng.
 - [`yt-dlp`](https://github.com/yt-dlp/yt-dlp): tải phụ đề và metadata video.
 - [`youtube-transcript-api`](https://github.com/jdepoix/youtube-transcript-api): lấy transcript dự phòng.
 - [Mermaid](https://mermaid.js.org/): vẽ sơ đồ luồng trong phần System Map.

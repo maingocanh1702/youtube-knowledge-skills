@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Added
+- `README.en.md`: full English version of the README, linked from `README.md`.
+
+### Changed
+- README: removed the "recommended" label from the Google Antigravity IDE install option, added the lite package to the `.skill` list, and made the license note in the credits neutral.
+
 ## [v2.2.0] - 2026-10-08
 
 ### Added
