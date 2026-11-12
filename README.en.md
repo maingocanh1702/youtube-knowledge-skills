@@ -110,18 +110,58 @@ If your plan shows **Customize → Plugins**, you can also add the GitHub market
 
 ### Option 2: Codex / ChatGPT (OpenAI)
 
-Codex reads the same `SKILL.md` format:
+**Codex: install from the repository with skill-installer**
 
-```bash
-mkdir -p ~/.agents/skills        # available in every project
-cp -r skills/* ~/.agents/skills/
+Send this request in Codex before asking it to process a video:
 
-# or only for the current repo
-mkdir -p .agents/skills
-cp -r skills/* .agents/skills/
+```text
+$skill-installer Install all four skills from https://github.com/maingocanh1702/youtube-knowledge-skills:
+- skills/youtube-knowledge-vi-en-lite
+- skills/youtube-knowledge-vi-en
+- skills/youtube-knowledge-vi
+- skills/youtube-knowledge-en
 ```
 
-Codex picks up new skills automatically (restart it if a skill does not show up). Invoke with `$` or `/skills`. For the ChatGPT app, OpenAI's docs currently describe creating skills with `@skill-creator` or packaging them as a plugin; there is no direct folder or ZIP upload step.
+For manual installation from a checkout, place the selected skill folder under `~/.agents/skills/` for all projects or the current project's `.agents/skills/`. Keep its `SKILL.md`, `scripts/`, and any `references/` together. Avoid duplicate installations of the same skill name. If your installer version uses `~/.codex/skills/`, follow the actual path it reports.
+
+Codex discovers skills automatically; restart it if they do not appear. In the CLI/IDE, select one with `/skills` or invoke its `$` name:
+
+| Skill | Choose it for |
+|---|---|
+| `$youtube-knowledge-vi-en-lite` | Concise Vietnamese notes retaining English terms |
+| `$youtube-knowledge-vi-en` | Two complete VI/EN versions with language-switching HTML |
+| `$youtube-knowledge-vi` | Vietnamese reference notes |
+| `$youtube-knowledge-en` | English reference notes |
+
+Example:
+
+```text
+$youtube-knowledge-en Learn from this video and create Markdown + HTML notes: https://youtu.be/BV0hy6NET-U
+```
+
+**ChatGPT / ChatGPT Work**
+
+If your environment offers `@skill-creator`, provide the selected skill folder or repository source and ask it to create the skill:
+
+```text
+@skill-creator Create a skill from skills/youtube-knowledge-en in
+https://github.com/maingocanh1702/youtube-knowledge-skills.
+Keep the required scripts and references; check runtime availability before execution.
+```
+
+Once the skill has been created and appears in the picker, select it with `@` and provide a URL or transcript. Skill creation/installation depends on the environment and workspace policy. Installing a local Codex folder does not automatically sync it into your ChatGPT account.
+
+For distributing the suite to ChatGPT, use OpenAI's plugin packaging flow. Do not assume the Claude marketplace or the `.skill` archives in `packages/` are directly installable ChatGPT packages; check the format and installation flow your environment supports.
+
+**Runtime requirements and fallback behavior**
+
+- Transcript fetching requires Python 3.10+ and `yt-dlp` or `youtube-transcript-api`. Lite HTML export additionally requires Python's `markdown` package. Use a suitable Python environment rather than forcing system Python changes.
+- Always pass `--cookies-from-browser none` without a local browser. Browser cookies require the user's explicit authorization; the original script defaults to Chrome if the flag is omitted.
+- The fetch helper accepts YouTube URLs only. Read uploaded TXT/SRT/VTT transcripts directly; audio/video requires a separate transcription tool.
+- If YouTube blocks retrieval or captions are unavailable, supply a transcript. Retrieval is not guaranteed for every video. In ChatGPT without shell/file creation, produce notes in chat and do not claim scripts ran or HTML was created.
+- Use a fresh output directory for each run: the helper overwrites title-derived transcripts and scaffolds. HTML loads fonts and Mermaid from CDNs, so offline diagrams are not guaranteed.
+
+Official documentation: [Build skills](https://learn.chatgpt.com/docs/build-skills), [Package your plugin](https://developers.openai.com/plugins/build/plugins).
 
 ### Option 3: Google Antigravity IDE
 

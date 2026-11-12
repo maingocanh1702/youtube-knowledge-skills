@@ -118,18 +118,58 @@ Nếu gói của bạn có mục **Customize → Plugins**, cũng có thể thê
 
 ### Cách 3: Dùng cho Codex / ChatGPT (OpenAI)
 
-Codex đọc cùng định dạng `SKILL.md`:
+**Codex: cài từ repo bằng skill-installer**
 
-```bash
-mkdir -p ~/.agents/skills        # dùng cho mọi dự án
-cp -r skills/* ~/.agents/skills/
+Trong Codex, gửi yêu cầu sau (thay vì dán URL video ngay khi chưa cài skill):
 
-# hoặc riêng cho repo hiện tại
-mkdir -p .agents/skills
-cp -r skills/* .agents/skills/
+```text
+$skill-installer Cài cả 4 skill từ https://github.com/maingocanh1702/youtube-knowledge-skills:
+- skills/youtube-knowledge-vi-en-lite
+- skills/youtube-knowledge-vi-en
+- skills/youtube-knowledge-vi
+- skills/youtube-knowledge-en
 ```
 
-Codex tự phát hiện skill mới (khởi động lại nếu chưa thấy), gọi bằng `$` hoặc `/skills`. Với ứng dụng ChatGPT, OpenAI hiện hướng dẫn tạo skill bằng `@skill-creator` hoặc đóng gói thành plugin; chưa có bước tải lên thư mục/ZIP trực tiếp.
+Nếu cài thủ công từ một bản checkout, đặt thư mục skill đã chọn vào `~/.agents/skills/` cho mọi dự án hoặc `.agents/skills/` của dự án hiện tại. Giữ nguyên cả `SKILL.md`, `scripts/` và `references/` nếu có. Tránh cài hai bản cùng tên ở nhiều vị trí. Dùng đường dẫn thực tế do skill-installer báo nếu phiên bản của bạn cài vào `~/.codex/skills/`.
+
+Codex tự phát hiện skill; nếu chưa thấy, khởi động lại. Trong CLI/IDE, chọn bằng `/skills` hoặc gọi tên bằng `$`:
+
+| Skill | Chọn khi |
+|---|---|
+| `$youtube-knowledge-vi-en-lite` | Ghi chú gọn bằng tiếng Việt, giữ thuật ngữ Anh |
+| `$youtube-knowledge-vi-en` | Hai bản Việt–Anh đầy đủ, HTML có nút đổi ngôn ngữ |
+| `$youtube-knowledge-vi` | Tài liệu thuần Việt |
+| `$youtube-knowledge-en` | Tài liệu tiếng Anh |
+
+Ví dụ:
+
+```text
+$youtube-knowledge-vi-en-lite Học video này và tạo ghi chú Markdown + HTML: https://youtu.be/BV0hy6NET-U
+```
+
+**ChatGPT / ChatGPT Work**
+
+Nếu môi trường có `@skill-creator`, cung cấp thư mục skill hoặc nguồn repo và yêu cầu tạo skill từ biến thể cần dùng, ví dụ:
+
+```text
+@skill-creator Tạo skill từ skills/youtube-knowledge-vi-en-lite trong repo
+https://github.com/maingocanh1702/youtube-knowledge-skills.
+Giữ các script và tài liệu tham khảo cần thiết; kiểm tra môi trường trước khi chạy.
+```
+
+Sau khi skill đã được tạo và có trong bộ chọn, dùng `@` để chọn skill đó rồi gửi URL hoặc transcript. Quyền tạo/cài skill phụ thuộc môi trường và chính sách workspace. Thư mục cài trên máy Codex không tự đồng bộ thành skill trong tài khoản ChatGPT.
+
+Muốn phân phối cả bộ cho ChatGPT, đóng gói theo luồng plugin của OpenAI. Không mặc định coi marketplace Claude hoặc file `.skill` trong `packages/` là gói cài ChatGPT trực tiếp; kiểm tra định dạng và luồng cài mà môi trường hỗ trợ.
+
+**Điều kiện chạy và xử lý khi thiếu công cụ**
+
+- Script lấy transcript cần Python 3.10+ và `yt-dlp` hoặc `youtube-transcript-api`. Bản Lite cần thêm thư viện Python `markdown` để xuất HTML; dùng môi trường Python phù hợp, không buộc sửa Python hệ thống.
+- Trong môi trường không có trình duyệt, luôn truyền `--cookies-from-browser none`. Chỉ dùng cookie trình duyệt khi người dùng cho phép rõ ràng; script gốc mặc định chọn Chrome nếu bỏ cờ này.
+- Helper lấy transcript chỉ nhận URL YouTube. Với TXT/SRT/VTT đính kèm, đọc file trực tiếp; audio/video cần công cụ phiên âm riêng.
+- Nếu YouTube chặn hoặc không có phụ đề, cung cấp transcript để tiếp tục; không đảm bảo lấy được mọi video. Nếu ChatGPT không có shell/tạo file, chỉ tạo ghi chú trong chat và không nhận đã chạy script/xuất HTML.
+- Dùng thư mục đầu ra mới cho mỗi lượt: helper ghi đè transcript và scaffold theo tên video. HTML dùng CDN cho phông chữ và Mermaid, nên không bảo đảm sơ đồ hoạt động offline.
+
+Tài liệu chính thức: [Build skills](https://learn.chatgpt.com/docs/build-skills), [Package your plugin](https://developers.openai.com/plugins/build/plugins).
 
 ### Cách 4: Nhập Bằng File Đóng Gói `.skill`
 
