@@ -329,6 +329,7 @@ def prepare_bilingual_template(template_path: Optional[Path] = None) -> str:
       // Re-trigger scroll spy to sync active headings and sub-accordions in new language
       try {
         window.dispatchEvent(new Event("scroll"));
+        if (typeof setupShareLinks === "function") setupShareLinks();
       } catch (e) {}
     }
     window.setLanguage = setLanguage;
@@ -383,6 +384,7 @@ def prepare_bilingual_template(template_path: Optional[Path] = None) -> str:
       renderMermaid();
       setupTocSpy();
       setupRailProgress();
+      setupShareLinks();
     });"""
 
     new_boot_code = """    // ---------- Boot ----------
@@ -394,6 +396,7 @@ def prepare_bilingual_template(template_path: Optional[Path] = None) -> str:
       renderMermaid();
       setupTocSpy();
       setupRailProgress();
+      setupShareLinks();
     });"""
     if old_boot_code not in tpl:
         raise RuntimeError("md2html template changed: Boot block not found, cannot inject restoreLanguage().")

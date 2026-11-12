@@ -402,14 +402,19 @@
       display: block;
     }
 
-    .rail .credit {
-      margin-top: 24px;
-      padding-top: 14px;
+    .rail .share, .rail .credit {
+      margin-top: 18px;
+      padding-top: 12px;
       border-top: 1px dashed var(--border);
     }
 
-    .rail .credit .th {
+    .rail .share .th, .rail .credit .th {
       margin-bottom: 6px;
+    }
+
+    .rail .share a, .rail .credit a {
+      cursor: pointer;
+      user-select: none;
     }
 
     .toc-backdrop {
@@ -1692,10 +1697,16 @@
       </nav>
       <div class="prog" id="prog"><b></b>░░░░░░░░░░░░░░░░░░░░░░░░░░░░<span class="pct">00%</span></div>
       <div class="rail-time" id="railTime">{{READ_TIME}}</div>
+      <div class="share" id="railShare">
+        <div class="th">SHARE</div>
+        <a id="shX" target="_blank" rel="noopener noreferrer" href="#"><span class="br">└</span>X.com</a>
+        <a id="shLi" target="_blank" rel="noopener noreferrer" href="#"><span class="br">└</span>LinkedIn</a>
+        <a id="shMail" href="#"><span class="br">└</span>Email</a>
+        <a id="shCopy" role="button" tabindex="0" onclick="copyShareUrl(this)"><span class="br">└</span><span class="sh-copy-text">Copy URL</span></a>
+      </div>
       <div class="credit" id="railCredit">
-        <div class="th"><span class="vi-only">CREDIT</span><span class="en-only">CREDIT</span></div>
+        <div class="th">GENERATE BY</div>
         <a href="https://github.com/maingocanh1702/youtube-knowledge-skills" target="_blank" rel="noopener noreferrer" title="YouTube Knowledge Skills"><span class="br">└</span>YouTube Knowledge Skills</a>
-        <a href="https://github.com/maingocanh1702/youtube-knowledge-skills" target="_blank" rel="noopener noreferrer" title="GitHub Repository"><span class="br">└</span><span class="vi-only">GitHub Repository</span><span class="en-only">GitHub Repo</span></a>
       </div>
     </aside>
 
@@ -2019,7 +2030,59 @@
       renderMermaid();
       setupTocSpy();
       setupRailProgress();
+      setupShareLinks();
     });
+
+    // ---------- Share Controller ----------
+    function copyShareUrl(el) {
+      const textSpan = el.querySelector(".sh-copy-text") || el;
+      const originalText = textSpan.textContent;
+      const url = window.location.href;
+
+      const setCopied = () => {
+        textSpan.textContent = "Copied!";
+        textSpan.style.color = "var(--accent)";
+        setTimeout(() => {
+          textSpan.textContent = originalText;
+          textSpan.style.color = "";
+        }, 2000);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(setCopied).catch(() => {
+          fallbackCopyText(url);
+          setCopied();
+        });
+      } else {
+        fallbackCopyText(url);
+        setCopied();
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    function setupShareLinks() {
+      try {
+        const titleEl = document.querySelector(".doc-title");
+        const title = titleEl ? titleEl.innerText.trim() : document.title;
+        const url = window.location.href;
+        const shX = document.getElementById("shX");
+        if (shX) shX.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+        const shLi = document.getElementById("shLi");
+        if (shLi) shLi.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        const shMail = document.getElementById("shMail");
+        if (shMail) shMail.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+      } catch (e) {}
+    }
   </script>
 </body>
 </html>
