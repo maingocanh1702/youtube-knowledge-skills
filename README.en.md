@@ -65,64 +65,48 @@ Every platform below uses the same open format: **a skill folder with `SKILL.md`
 
 ### Option 1: Claude
 
-The skills use a Claude-compatible frontmatter (`name`, `description`, `metadata`). This repository is also a **plugin marketplace**, so one command installs all four skills.
+#### Claude Code (simplest)
 
-**Install from the marketplace (Claude Code)**
+**1. Install** (run in your terminal, once):
 
 ```bash
-# One step (Claude Code v2.1.275 or later)
-/plugin install youtube-knowledge --marketplace maingocanh1702/youtube-knowledge-skills
-
-# Or two steps from your shell
 claude plugin marketplace add maingocanh1702/youtube-knowledge-skills
 claude plugin install youtube-knowledge@youtube-knowledge-skills
 ```
 
-Check, update, remove:
+**2. Use it:** open Claude Code and send a video link:
+
+```
+Learn from this video for me: https://youtu.be/BV0hy6NET-U
+```
+
+Claude picks a skill, fetches the transcript and writes the note (Markdown + HTML). To choose an edition yourself, name the skill:
+
+| Skill | Use it when |
+|---|---|
+| `youtube-knowledge-vi-en-lite` | Compact edition, Vietnamese mixed with English terms |
+| `youtube-knowledge-vi-en` | Two-part bilingual, HTML with a language toggle |
+| `youtube-knowledge-vi` | Pure Vietnamese |
+| `youtube-knowledge-en` | Pure English |
+
+**3. Update or remove:**
 
 ```bash
-claude plugin details youtube-knowledge        # should show Skills (4)
 claude plugin update youtube-knowledge@youtube-knowledge-skills
 claude plugin uninstall youtube-knowledge@youtube-knowledge-skills
 ```
 
-The plugin contains all four skills (`youtube-knowledge-vi-en-lite`, `-vi-en`, `-vi`, `-en`). When you call one by name, the name carries the plugin prefix, for example `youtube-knowledge:youtube-knowledge-vi-en-lite`.
+> You need `python3` and `yt-dlp` on your machine (see [Prerequisites](#-prerequisites)). If the skill does not run, use `/reload-plugins` or reopen Claude Code.
+> To install manually without the marketplace: `cp -r skills/* ~/.claude/skills/`.
 
-**Claude.ai / Claude Desktop / Cowork**
-
-Quick way: go to **Customize → Plugins** and add the GitHub marketplace `maingocanh1702/youtube-knowledge-skills` (if your plan does not show this, use the file upload below). To upload a file instead:
+#### Claude.ai / Claude Desktop / Cowork
 
 1. Go to **Settings → Capabilities** and turn on *Code execution and file creation*.
-2. Go to **Customize → Skills → `+` → Upload a skill**.
-3. Pick a file from [`packages/`](packages/), one skill at a time. If the dialog rejects the `.skill` extension, rename it to `.zip`.
+2. Go to **Customize → Skills → `+` → Upload a skill** and pick a file from [`packages/`](packages/) (if the extension `.skill` is rejected, rename it to `.zip`). If you only want one, pick `youtube-knowledge-vi-en-lite.skill`; you can upload all four.
 
-Which file to pick (you can upload all four; Claude chooses by each skill's description):
+If your plan shows **Customize → Plugins**, you can also add the GitHub marketplace `maingocanh1702/youtube-knowledge-skills` instead of uploading.
 
-| `.skill` file | Use it when |
-|---|---|
-| `youtube-knowledge-vi-en-lite.skill` | You want the compact Vietnamese + English mixed edition, the lightest option on Claude.ai / Cowork |
-| `youtube-knowledge-vi-en.skill` | You need the two-part bilingual edition with a language-toggle HTML |
-| `youtube-knowledge-vi.skill` | You need pure Vietnamese with all terms translated |
-| `youtube-knowledge-en.skill` | You need the full English technical reference |
-
-**Manual install for Claude Code (without the marketplace)**
-
-```bash
-# Global
-mkdir -p ~/.claude/skills
-cp -r skills/* ~/.claude/skills/
-
-# Or for one project only
-mkdir -p .claude/skills
-cp -r skills/* .claude/skills/
-
-# Or unzip straight from a packaged file (lite edition shown)
-unzip packages/youtube-knowledge-vi-en-lite.skill -d ~/.claude/skills/
-```
-
-**Usage:** once installed, send a YouTube URL with a request, for example `Learn from this video for me: https://youtu.be/BV0hy6NET-U`. Claude picks a skill from its description, runs the transcript script and writes the note (Markdown and HTML). To pick one edition explicitly, name it, e.g. `use youtube-knowledge-vi-en-lite for this video` (installed from the marketplace, the name is `youtube-knowledge:youtube-knowledge-vi-en-lite`). If the skill does not run, restart the Claude Code session or run `/reload-plugins`.
-
-> **Running inside Claude.ai / Cowork:** the sandbox has no browser, so there are no Chrome cookies. Run the script with `--cookies-from-browser none`. If YouTube still blocks the request, paste the transcript to Claude and continue from there.
+> Claude.ai / Cowork has no Chrome cookies, so run the script with `--cookies-from-browser none`. If YouTube still blocks the request, paste the transcript to Claude and continue from there.
 
 ### Option 2: Codex / ChatGPT (OpenAI)
 
