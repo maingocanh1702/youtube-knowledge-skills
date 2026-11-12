@@ -1724,100 +1724,147 @@
       background: var(--code-bg);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 3px;
-      gap: 3px;
+      padding: 4px;
+      gap: 4px;
     }
 
     .disc-btn {
       border: none;
       background: transparent;
-      padding: 6px 14px;
-      font-size: 12.5px;
+      padding: 7px 16px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
       border-radius: 999px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
+      user-select: none;
     }
 
     .disc-btn:hover {
       color: var(--text);
+      background: rgba(0,0,0,0.04);
+    }
+
+    [data-theme="dark"] .disc-btn:hover {
+      background: rgba(255,255,255,0.06);
     }
 
     .disc-btn.active.is-official {
       background: #2563EB;
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
     }
 
     .disc-btn.active.is-forensic {
       background: #DC2626;
-      color: #fff;
-      box-shadow: 0 2px 8px rgba(220,38,38,0.3);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.35);
     }
 
+    /* Balanced 2x2 Grid Layout */
     .disc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 720px) {
+      .disc-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
     }
 
     .disc-card {
       background: var(--surface-2, rgba(0,0,0,0.02));
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 16px;
+      border-radius: var(--radius);
+      padding: 20px;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      height: 100%;
+      box-sizing: border-box;
     }
 
     .disc-card:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-md, 0 6px 18px rgba(0,0,0,0.08));
+      border-color: var(--accent);
     }
 
     .disc-card-topic {
-      font-size: 12px;
+      font-size: 11px;
       font-family: var(--font-mono, monospace);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       color: var(--text-subtle);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-weight: 700;
+    }
+
+    .disc-tag {
+      font-size: 10.5px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: normal;
     }
 
     .disc-content-box {
-      min-height: 95px;
-      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 120px;
+      padding: 14px 16px;
       border-radius: 8px;
-      transition: all 0.3s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+      box-sizing: border-box;
     }
 
     .disc-content-box.mode-official {
       background: rgba(37, 99, 235, 0.05);
-      border-left: 3px solid #2563EB;
+      border-left: 4px solid #2563EB;
     }
 
     .disc-content-box.mode-forensic {
       background: rgba(220, 38, 38, 0.06);
-      border-left: 3px solid #DC2626;
+      border-left: 4px solid #DC2626;
+    }
+
+    [data-theme="dark"] .disc-content-box.mode-official {
+      background: rgba(37, 99, 235, 0.12);
+      border-left-color: #3B82F6;
+    }
+
+    [data-theme="dark"] .disc-content-box.mode-forensic {
+      background: rgba(220, 38, 38, 0.14);
+      border-left-color: #EF4444;
     }
 
     .disc-status-pill {
-      display: inline-block;
-      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      font-size: 11.5px;
       font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px;
-      margin-bottom: 6px;
+      padding: 3px 9px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      width: fit-content;
+      line-height: 1.3;
+      transition: all 0.2s ease;
     }
 
     .pill-official {
@@ -1846,20 +1893,24 @@
 
     .disc-text {
       font-size: 13.5px;
-      line-height: 1.5;
+      line-height: 1.6;
       color: var(--text);
       margin: 0;
+      flex: 1;
     }
 
     .disc-diff-note {
-      margin-top: 10px;
-      font-size: 11.5px;
+      margin-top: 14px;
+      font-size: 12px;
       color: var(--text-muted);
       border-top: 1px dashed var(--border);
-      padding-top: 8px;
-      line-height: 1.4;
+      padding-top: 10px;
+      line-height: 1.45;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
     }
-
+    
     /* --- Component 2: 5-Stage Conduit Pipeline Simulator --- */
     .sim-stepper {
       display: grid;
@@ -1994,8 +2045,14 @@
 
     .sim-grid-details {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
+    }
+
+    @media (max-width: 680px) {
+      .sim-grid-details {
+        grid-template-columns: 1fr;
+      }
     }
 
     .sim-detail-block {
@@ -4273,300 +4330,7 @@ MAINTAIN AN EVIDENCE-DRIVEN, UNCOMPROMISING, FORENSIC TONE. DISREGARD ALL MARKET
     </main>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js">
-    // ============================================================
-    // BESPOKE INTERACTIVE CONTROLLERS: NVIDIA SCANDAL
-    // ============================================================
-
-    // 1. Discrepancy Matrix Toggle
-    const DISC_DATA = {
-      vi: {
-        official: {
-          b1: { pill: "🏛️ Báo Cáo 10-K: 0% Doanh Thu", text: "NVIDIA tuyên bố tuân thủ nghiêm ngặt lệnh cấm vận của Mỹ. Doanh thu chip máy gia tốc tại Trung Quốc từ 95% rơi thẳng về 0%. NVIDIA khẳng định không còn phụ thuộc vào thị trường đại lục.", diff: "Điểm bất thường: Tổng doanh thu toàn cầu vẫn tăng trưởng kỷ lục 250% sau khi mất 20% thị trường." },
-          b2: { pill: "🏛️ 'Không Thể Buôn Lậu'", text: "Jensen Huang mỉa mai trên truyền thông: 'Một rack GPU AI nặng 2 tấn, gồm 1,5 triệu linh kiện, tiêu thụ 200kW điện và cần hạ tầng sân bóng đá mới chạy được. Buôn lậu là điều bất khả thi.'", diff: "Lỗ hổng ngụy biện: Đánh tráo khái niệm giữa cụm siêu máy chủ hoàn chỉnh và từng bo mạch GPU rời." },
-          b3: { pill: "🏛️ Official Cloud Partner", text: "Mega Speed được NVIDIA công nhận là Đối tác Đám mây Chính thức tại Đông Nam Á, được cấp quyền ưu tiên phân bổ hàng ngàn GPU H100 để xây dựng hạ tầng trung tâm dữ liệu độc lập.", diff: "Dấu hiệu vỏ bọc: Thành lập thần tốc ngay sau lệnh cấm, thuộc sở hữu BVI của Alice Huang." },
-          b4: { pill: "🏛️ Tụt Hậu 5 - 10 Năm", text: "Chính quyền Mỹ và các nhà phân tích tin rằng việc phong tỏa chip AI sẽ khiến các phòng nghiên cứu Trung Quốc bị đóng băng năng lực tính toán và tụt lại xa so với phương Tây.", diff: "Cú sốc thực tế: DeepSeek ra mắt R1 với hiệu năng ngang ngửa OpenAI o1 với chi phí đào tạo siêu rẻ." }
-        },
-        forensic: {
-          b1: { pill: "🚨 Doanh Thu Singapore Tăng 22%", text: "Singapore (chỉ 6 triệu dân) bất ngờ vọt lên thành thị trường lớn thứ 2 của NVIDIA, tiêu thụ tới 22% sản lượng toàn cầu (~10.3 tỷ USD/quý). Đây chính là kênh rửa doanh thu để tuồn chip ngược về Trung Quốc.", diff: "Bằng chứng dòng tiền: Doanh thu Singapore bùng nổ 400% chỉ trong 3 quý sau lệnh cấm vận." },
-          b2: { pill: "🚨 Bóc Tem Sê-ri Bằng Máy Sấy Tóc", text: "Điều tra của Financial Times & Bloomberg phơi bày: Các bo mạch GPU rời rạc được đưa vào các xưởng ngầm Đông Nam Á, dùng máy sấy tóc công nghiệp bóc tem sê-ri, dập lại mã hợp pháp rồi đưa thẳng vào Thâm Quyến.", diff: "Bằng chứng vật lý: Hải quan Thâm Quyến thu giữ hàng loạt card đồ họa có sê-ri bị cạo sửa tinh vi." },
-          b3: { pill: "🚨 Văn Phòng Ma Với 2 Nhân Viên", text: "Culper Research thị sát trụ sở Mega Speed tại Singapore: Văn phòng trống rỗng, không máy chủ, không kỹ sư, chỉ có đúng 2 nhân viên tiếp tân. Nhận hàng tỷ USD tiền tài trợ ngầm từ tập đoàn Alibaba.", diff: "Dấu hiệu gián điệp: Alice Huang (Huang Lee) đứng tên mua lại công ty chỉ vài ngày trước khi nhận chứng nhận từ Jensen." },
-          b4: { pill: "🚨 50.000 GPU H100 Tại DeepSeek", text: "Alexandr Wang (CEO Scale AI) xác nhận startup Trung Quốc DeepSeek đang vận hành bí mật cụm 50.000 chip NVIDIA H100 để đào tạo mô hình R1, xóa bỏ khoảng cách công nghệ với Mỹ xuống còn vài tháng.", diff: "Hậu quả an ninh: Lệnh cấm vận của Washington bị vô hiệu hóa hoàn toàn trên thực tế." }
-        }
-      },
-      en: {
-        official: {
-          b1: { pill: "🏛️ 10-K Filing: 0% Revenue", text: "NVIDIA formally claims 100% EAR compliance. Accelerated computing revenue in mainland China officially plummeted from 95% market share down to 0%, claiming zero China dependency.", diff: "Anomaly: Total global revenues continued skyrocketing 250% after writing off 20% of its global market." },
-          b2: { pill: "🏛️ 'Impossible to Smuggle'", text: "Jensen Huang ridiculed smuggling allegations: 'A full AI GPU datacenter rack weighs 2 tons, contains 1.5 million parts, draws 200kW, and requires a football stadium infrastructure. Smuggling is impossible.'", diff: "Strawman fallacy: Conflating an entire assembled datacenter rack with discrete bare-metal GPU accelerator boards." },
-          b3: { pill: "🏛️ Official Cloud Partner", text: "Mega Speed is certified as an Official NVIDIA Cloud Partner in Southeast Asia, prioritized with thousands of H100 allocations to construct legitimate sovereign cloud clusters.", diff: "Shell entity red flags: Spun off post-sanctions, owned by Alice Huang's BVI vehicle, and funded by Alibaba." },
-          b4: { pill: "🏛️ 5 - 10 Year Lag", text: "Washington policymakers assumed strict chip blockades would freeze Chinese AI research and maintain a multi-generation Western technological lead.", diff: "Strategic shock: DeepSeek launched R1 matching OpenAI o1 performance at a fraction of traditional computing cost." }
-        },
-        forensic: {
-          b1: { pill: "🚨 Singapore Consumes 22% of GPUs", text: "Singapore (population 6 million) miraculously surged into NVIDIA's second-largest global market, absorbing 22% of total GPU production ($10.3B/quarter). It served as the primary re-export routing node into mainland China.", diff: "Cash trail: Singapore cloud datacenter imports surged 400% within 3 quarters of the BIS export embargo." },
-          b2: { pill: "🚨 Heat-Gun De-Stamping in Transit", text: "Financial Times and Bloomberg field investigations revealed: GPU accelerators were dismantled into modular boards, stripped of serial numbers using industrial heat guns, restamped with legitimate markings, and trucked into Shenzhen.", diff: "Physical evidence: Border seizures in Hong Kong uncovered modified heatsinks with obliterated wafer IDs." },
-          b3: { pill: "🚨 Empty Shell Office with 2 Staff", text: "Culper Research on-site inspection confirmed Mega Speed's Singapore headquarters was completely devoid of hardware or engineering personnel—staffed by two receptionists while funded by billions from Alibaba's Apex.", diff: "Espionage ties: Alice Huang acquired 100% of the entity through a BVI shell immediately prior to receiving NVIDIA certification." },
-          b4: { pill: "🚨 50,000 H100s Powering DeepSeek", text: "Scale AI CEO Alexandr Wang and forensic intelligence confirmed DeepSeek secretly amassed an illicit cluster of 50,000 NVIDIA H100 GPUs, closing the technological gap with Silicon Valley to mere months.", diff: "Geopolitical impact: U.S. export controls were fundamentally compromised by commercial evasion networks." }
-        }
-      }
-    };
-
-    function switchDiscrepancy(mode, lang) {
-      const isOfficial = mode === "official";
-      const btnOff = document.getElementById(`btn-disc-official-${lang}`);
-      const btnForensic = document.getElementById(`btn-disc-forensic-${lang}`);
-      if (btnOff && btnForensic) {
-        btnOff.classList.toggle("active", isOfficial);
-        btnForensic.classList.toggle("active", !isOfficial);
-      }
-
-      const data = DISC_DATA[lang][mode];
-      for (let i = 1; i <= 4; i++) {
-        const item = data[`b${i}`];
-        const box = document.getElementById(`disc-box-${i}-${lang}`);
-        const pill = document.getElementById(`disc-pill-${i}-${lang}`);
-        const text = document.getElementById(`disc-text-${i}-${lang}`);
-        const diff = document.getElementById(`disc-diff-${i}-${lang}`);
-        
-        if (box) {
-          box.className = `disc-content-box mode-${mode}`;
-        }
-        if (pill) {
-          pill.className = `disc-status-pill pill-${mode}`;
-          pill.textContent = item.pill;
-        }
-        if (text) text.textContent = item.text;
-        if (diff) diff.innerHTML = `<strong>${isOfficial ? (lang === 'vi' ? 'Điểm bất thường:' : 'Anomaly:') : (lang === 'vi' ? 'Bằng chứng thực tế:' : 'Evidence trail:')}</strong> ${item.diff}`;
-      }
-    }
-    window.switchDiscrepancy = switchDiscrepancy;
-
-    // 2. Conduit Simulator Controller
-    const CONDUIT_DATA = {
-      vi: [
-        {
-          title: "Chặng 1: Bơm Vốn Ngầm Từ Đại Lục (Alibaba & Apex)",
-          cash: "Apex Enterprise Solutions (thuộc sở hữu của Alibaba) bơm hàng tỷ USD vốn tài trợ dưới danh nghĩa hợp đồng mua sắm hạ tầng đám mây quốc tế.",
-          hardware: "Chưa xuất hiện phần cứng thực tế. Toàn bộ là dòng tiền ủy thác offshore để che giấu chủ sở hữu hưởng lợi cuối cùng (UBO).",
-          evidence: "Bản cáo bạch tài chính của Seven Road Holdings ghi nhận khoản thoái vốn 100% của Mega Speed cho pháp nhân BVI của Alice Huang.",
-          law: "Đạo luật Quản lý Ngoại hối Trung Quốc & Đạo luật Minh bạch Doanh nghiệp Mỹ (Corporate Transparency Act)."
-        },
-        {
-          title: "Chặng 2: Vỏ Bọc Pháp Lý BVI (Huang Lee Limited & Alice Huang)",
-          cash: "Huang Lee Limited (đăng ký tại Quần đảo Virgin thuộc Anh - BVI) thanh toán tiền mặt để hoàn tất thâu tóm Mega Speed International.",
-          hardware: "Hợp đồng đặt mua hàng nghìn cụm GPU H100 được ký kết bí mật trước khi lệnh cấm vận tiếp theo có hiệu lực.",
-          evidence: "Alice Huang (tên pháp lý Huang Lee) đứng tên giám đốc duy nhất của pháp nhân BVI, trực tiếp điều hành mạng lưới mua sắm.",
-          law: "Quy chuẩn KYC ngân hàng quốc tế và Đạo luật Chống Rửa Tiền Liên bang (AML)."
-        },
-        {
-          title: "Chặng 3: Trạm Trung Chuyển Singapore (Mega Speed Cloud Partner)",
-          cash: "NVIDIA ghi nhận doanh thu xuất khẩu hợp pháp sang Singapore; doanh thu tại đây bùng nổ lên tới 22% toàn cầu (~10.3 tỷ USD/quý).",
-          hardware: "Hàng ngàn rack máy chủ NVIDIA H100 nguyên seal được xuất xưởng từ TSMC/Đài Loan và cập cảng Singapore hợp pháp.",
-          evidence: "Kiểm toán độc lập của Culper Research: Trụ sở Mega Speed tại Singapore hoàn toàn trống rỗng, chỉ có đúng 2 nhân viên trực ca.",
-          law: "Đạo luật Kiểm soát Xuất khẩu Mỹ (EAR - Export Administration Regulations)."
-        },
-        {
-          title: "Chặng 4: Xóa Tem Sê-ri & Tuồn Hàng Đông Nam Á",
-          cash: "Các công ty bình phong tại Hong Kong và Malaysia thanh toán phí vận chuyển ngầm với mức chênh lệch giá (cash premium) 50% - 100%.",
-          hardware: "Máy chủ GPU được tháo rời thành từng bo mạch, dùng máy sấy tóc công nghiệp cạo gỡ tem số sê-ri NVIDIA, dập mã giả rồi đưa vào Thâm Quyến.",
-          evidence: "Financial Times & Bloomberg ghi nhận hoạt động mua bán chip H100 công khai tại các chợ đen điện tử Hoa Cường Bắc.",
-          law: "Đạo luật Quyền lực Kinh tế Khẩn cấp Quốc tế (IEEPA - International Emergency Economic Powers Act)."
-        },
-        {
-          title: "Chặng 5: Cụm Siêu Máy Tính Ngầm 50.000 H100 (DeepSeek)",
-          cash: "Dòng tiền lợi nhuận khổng lồ được tái đầu tư vào các quỹ nghiên cứu AI của nhà nước Trung Quốc.",
-          hardware: "DeepSeek bí mật vận hành cụm 50.000 GPU H100 nguyên bản, tiêu thụ khoảng 50 Megawatts điện để huấn luyện mô hình R1.",
-          evidence: "Alexandr Wang (CEO Scale AI) xác nhận công khai trước Quốc hội và giới công nghệ về quy mô cụm máy chủ DeepSeek.",
-          law: "Vi phạm nghiêm trọng an ninh quốc gia Mỹ; dẫn tới cuộc điều tra hình sự của Cục Điều tra Liên bang (FBI)."
-        }
-      ],
-      en: [
-        {
-          title: "Stage 1: Covert Capital Inflow (Alibaba & Apex)",
-          cash: "Apex Enterprise Solutions (wholly backed by Alibaba) channels billions in disguised financing under international cloud expansion contracts.",
-          hardware: "No physical silicon deployed yet. Capital trails remain strictly financial and offshore to shield ultimate beneficial ownership (UBO).",
-          evidence: "Seven Road Holdings financial disclosures document the expedited sale of 100% of Mega Speed to Alice Huang's BVI vehicle.",
-          law: "U.S. Corporate Transparency Act, FinCEN anti-money laundering frameworks, and Chinese foreign exchange regulations."
-        },
-        {
-          title: "Stage 2: The BVI Offshore Shield (Huang Lee Limited)",
-          cash: "Huang Lee Limited (registered in the British Virgin Islands) executes cash transfers to finalize the acquisition of Mega Speed International.",
-          hardware: "Pre-order commitments for thousands of H100 clusters are locked in prior to expanded export control deadlines.",
-          evidence: "Corporate registries confirm Alice Huang (Huang Lee) as the sole director and beneficial shareholder of the BVI vehicle.",
-          law: "International banking Know-Your-Customer (KYC) compliance and federal Anti-Money Laundering (AML) statutes."
-        },
-        {
-          title: "Stage 3: The Singapore Transit Hub (Mega Speed Official Partner)",
-          cash: "NVIDIA books pristine export revenues to Singapore; regional sales surge to 22% of worldwide compute revenue ($10.3B/quarter).",
-          hardware: "Factory-sealed H100 server racks fabricated by TSMC in Taiwan arrive legitimately in Singaporean bonded warehouses.",
-          evidence: "Culper Research on-site forensic inspection: Mega Speed headquarters is an empty shell office with two administrative staff.",
-          law: "U.S. Export Administration Regulations (EAR) and Department of Commerce Bureau of Industry and Security (BIS) rules."
-        },
-        {
-          title: "Stage 4: Hardware De-Serialization & Covert Routing",
-          cash: "Intermediaries in Hong Kong, Malaysia, and Bangkok settle transport premiums of 50% to 100% in cash and offshore tether.",
-          hardware: "Server racks are broken down into discrete GPU boards; industrial heat guns peel off serial tracking labels before smuggling into Shenzhen.",
-          evidence: "Financial Times and Bloomberg undercover reporting document illicit H100 trading stalls in Huaqiangbei electronics markets.",
-          law: "International Emergency Economic Powers Act (IEEPA) criminal smuggling provisions."
-        },
-        {
-          title: "Stage 5: DeepSeek's Illicit 50,000-H100 Supercluster",
-          cash: "Capital efficiencies generated by covert hardware access fuel aggressive open-source model training and state subsidies.",
-          hardware: "DeepSeek activates a cluster of 50,000 covert H100 accelerators consuming ~50MW of power to train the revolutionary R1 model.",
-          evidence: "Scale AI CEO Alexandr Wang and national intelligence agencies confirm the active footprint of DeepSeek's accelerator farm.",
-          law: "Direct compromise of Western technological containment, precipitating full-scale FBI counterintelligence investigations."
-        }
-      ]
-    };
-
-    let conduitState = { vi: { step: 0, timer: null }, en: { step: 0, timer: null } };
-
-    function setConduitStep(stepIdx, lang) {
-      conduitState[lang].step = stepIdx;
-      const data = CONDUIT_DATA[lang][stepIdx];
-      
-      // Update step buttons
-      const stepper = document.getElementById(`conduit-stepper-${lang}`);
-      if (stepper) {
-        const btns = stepper.querySelectorAll(".sim-step-btn");
-        btns.forEach((b, idx) => b.classList.toggle("active", idx === stepIdx));
-      }
-
-      // Update flow graphic nodes
-      for (let i = 0; i < 5; i++) {
-        const node = document.getElementById(`node-${lang}-${i}`);
-        if (node) {
-          node.classList.toggle("active-node", i === stepIdx);
-        }
-      }
-
-      // Update inspector text
-      const cashEl = document.getElementById(`sim-flow-cash-${lang}`);
-      const hwEl = document.getElementById(`sim-flow-hardware-${lang}`);
-      const evEl = document.getElementById(`sim-flow-evidence-${lang}`);
-      const lawEl = document.getElementById(`sim-flow-law-${lang}`);
-
-      if (cashEl) cashEl.innerHTML = `<strong>${data.title}</strong><br/>${data.cash}`;
-      if (hwEl) hwEl.textContent = data.hardware;
-      if (evEl) evEl.textContent = data.evidence;
-      if (lawEl) lawEl.textContent = data.law;
-    }
-    window.setConduitStep = setConduitStep;
-
-    function nextConduitStep(lang) {
-      let next = (conduitState[lang].step + 1) % 5;
-      setConduitStep(next, lang);
-    }
-    window.nextConduitStep = nextConduitStep;
-
-    function prevConduitStep(lang) {
-      let prev = (conduitState[lang].step - 1 + 5) % 5;
-      setConduitStep(prev, lang);
-    }
-    window.prevConduitStep = prevConduitStep;
-
-    function toggleConduitPlay(lang) {
-      const btn = document.getElementById(`btn-play-conduit-${lang}`);
-      const textSpan = document.getElementById(`play-text-${lang}`);
-      
-      if (conduitState[lang].timer) {
-        clearInterval(conduitState[lang].timer);
-        conduitState[lang].timer = null;
-        if (textSpan) textSpan.textContent = lang === 'vi' ? "▶ Tự Động Trình Chiếu" : "▶ Auto-Play Simulation";
-        if (btn) btn.classList.remove("is-running");
-      } else {
-        nextConduitStep(lang);
-        conduitState[lang].timer = setInterval(() => nextConduitStep(lang), 3500);
-        if (textSpan) textSpan.textContent = lang === 'vi' ? "⏸ Tạm Dừng Trình Chiếu" : "⏸ Pause Simulation";
-        if (btn) btn.classList.add("is-running");
-      }
-    }
-    window.toggleConduitPlay = toggleConduitPlay;
-
-    // 3. Circular Capital Flywheel Controller
-    const FLYWHEEL_DATA = {
-      vi: [
-        {
-          title: "Trạm 1: NVIDIA Bơm Vốn Đầu Tư & Phân Bổ Hạn Ngạch GPU Hiếm",
-          desc: "Thay vì chỉ bán hàng thụ động, NVIDIA chủ động dùng kho tiền mặt khổng lồ để rót vốn đầu tư mạo hiểm vào các startup AI (CoreWeave, OpenAI, Nebius, Oracle). Đi kèm khoản đầu tư là quyền ưu tiên nhận hàng ngàn chip GPU H100 trong bối cảnh toàn cầu khan hiếm tột độ.",
-          risk: "NVIDIA đóng vai trò như 'Ngân Hàng Trung Ương', tự in tiền (GPU) để tạo lập thanh khoản thị trường và trói chặt khách hàng vào hệ sinh thái độc quyền CUDA."
-        },
-        {
-          title: "Trạm 2: Neoclouds & Startups Thế Chấp Hợp Đồng GPU Đi Vay Nợ",
-          desc: "Sau khi nhận cam kết phân bổ GPU từ NVIDIA, các Neoclouds mang chính số chip này ra làm tài sản thế chấp (asset-backed debt) để vay hàng tỷ USD nợ từ các quỹ đầu tư phố Wall như Blackstone, Magnetar và Carlyle.",
-          risk: "Tỷ lệ đòn bẩy tài chính cực cao. Các startup sẵn sàng chịu lãi suất 10-12% vì tin rằng nhu cầu tính toán AI sẽ mang lại siêu lợi nhuận vô tận."
-        },
-        {
-          title: "Trạm 3: Toàn Bộ Tiền Vay Được Dùng Để Mua Ngược Chip NVIDIA",
-          desc: "Toàn bộ số tiền vay nợ hàng tỷ USD không được dùng để nghiên cứu hay tuyển dụng, mà chảy ngược 100% về tài khoản của NVIDIA dưới hình thức các đơn đặt hàng máy chủ H100, H200 và Blackwell.",
-          risk: "NVIDIA bán chip với biên lợi nhuận gộp lên tới 75-80%. Cứ mỗi $1 tỷ USD bán ra, NVIDIA thu về $750 triệu USD lợi nhuận gộp thuần túy."
-        },
-        {
-          title: "Trạm 4: Doanh Thu Đỉnh Cao, Vốn Hóa $5.700 Tỷ & Tái Bơm Vốn",
-          desc: "NVIDIA công bố báo cáo tài chính đè bẹp mọi dự báo của Wall Street. Cổ phiếu NVDA bùng nổ, kéo vốn hóa lên đỉnh lịch sử $5.700 tỷ USD. Với túi tiền rủng rỉnh, NVIDIA lại có thêm hàng chục tỷ USD để tái đầu tư vào Trạm 1!",
-          risk: "Vòng lặp hoàn tất: Vốn đầu tư ban đầu của NVIDIA quay về túi dưới dạng doanh thu kỷ lục kèm đòn bẩy vốn hóa gấp 15 lần trên thị trường chứng khoán."
-        }
-      ],
-      en: [
-        {
-          title: "Station 1: Direct Equity Infusions & High-Priority GPU Allocations",
-          desc: "Rather than functioning as a passive component supplier, NVIDIA acts as lead investor into emerging AI cloud providers (CoreWeave, OpenAI, Nebius, Oracle). Crucially, the cash comes packaged with guaranteed allocation rights to scarce H100 accelerator clusters.",
-          risk: "NVIDIA functions as the de facto Central Bank of AI, printing liquidity (GPUs) to manufacture captive demand and lock partners into CUDA."
-        },
-        {
-          title: "Station 2: Asset-Backed Debt Financing Against GPU Collateral",
-          desc: "Armed with guaranteed hardware allocations, neoclouds pledge future GPU deliverables as debt collateral to secure billions in mezzanine debt from Wall Street titans like Blackstone, Magnetar, and Carlyle.",
-          risk: "Extreme financial leverage: Startups incur 10-12% debt service costs under the thesis of perpetual compute shortages."
-        },
-        {
-          title: "Station 3: 100% of Debt Recycled into Direct NVIDIA Hardware Orders",
-          desc: "The borrowed institutional billions bypass operational R&D and flow directly back onto NVIDIA's income statement as purchase orders for H100, H200, and next-generation Blackwell systems.",
-          risk: "NVIDIA captures staggering 75%+ gross margins, transforming Wall Street debt into pure high-margin corporate revenue."
-        },
-        {
-          title: "Station 4: Record Earnings, $5.7T Peak Market Cap & Re-Investment",
-          desc: "Quarterly earnings obliterate analyst expectations. NVDA stock surges, catapulting market valuation to an unprecedented $5.7T peak. Flush with cash reserves, NVIDIA re-initiates capital injections at Station 1!",
-          risk: "The flywheel closes: Initial cash equity returns as high-margin revenue multiplied by a 15x market cap multiple."
-        }
-      ]
-    };
-
-    function selectFlywheelNode(idx, lang) {
-      for (let i = 0; i < 4; i++) {
-        const node = document.getElementById(`fw-node-${lang}-${i}`);
-        if (node) node.classList.toggle("active", i === idx);
-      }
-      const data = FLYWHEEL_DATA[lang][idx];
-      const titleEl = document.getElementById(`fw-detail-title-${lang}`);
-      const descEl = document.getElementById(`fw-detail-desc-${lang}`);
-      const riskEl = document.getElementById(`fw-risk-${lang}`);
-
-      if (titleEl) titleEl.textContent = data.title;
-      if (descEl) descEl.textContent = data.desc;
-      if (riskEl) riskEl.textContent = data.risk;
-    }
-    window.selectFlywheelNode = selectFlywheelNode;
-
-    function pulseFlywheel(lang) {
-      const ring = document.getElementById(`flywheel-pulse-ring-${lang}`);
-      if (ring) {
-        ring.style.transition = "transform 1s ease";
-        ring.style.transformOrigin = "center";
-        ring.style.transform = "rotate(360deg)";
-        setTimeout(() => {
-          ring.style.transition = "none";
-          ring.style.transform = "rotate(0deg)";
-        }, 1100);
-      }
-      let current = 0;
-      const interval = setInterval(() => {
-        current = (current + 1) % 4;
-        selectFlywheelNode(current, lang);
-      }, 1800);
-      setTimeout(() => clearInterval(interval), 7500);
-    }
-    window.pulseFlywheel = pulseFlywheel;
-
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
   <script>
     // ---------- Theme & Safe Storage (file://, sandbox & mobile safe) ----------
     const STORAGE_KEY = "md2html-theme";
@@ -5333,5 +5097,301 @@ MAINTAIN AN EVIDENCE-DRIVEN, UNCOMPROMISING, FORENSIC TONE. DISREGARD ALL MARKET
   })();
 </script>
 <!-- FLOW-VIEWER:END -->
+<script id="bespoke-interactive-script">
+(function() {
+  "use strict";
+// ============================================================
+    // BESPOKE INTERACTIVE CONTROLLERS: NVIDIA SCANDAL
+    // ============================================================
+
+    // 1. Discrepancy Matrix Toggle
+    const DISC_DATA = {
+      vi: {
+        official: {
+          b1: { pill: "🏛️ Báo Cáo 10-K: 0% Doanh Thu", text: "NVIDIA tuyên bố tuân thủ nghiêm ngặt lệnh cấm vận của Mỹ. Doanh thu chip máy gia tốc tại Trung Quốc từ 95% rơi thẳng về 0%. NVIDIA khẳng định không còn phụ thuộc vào thị trường đại lục.", diff: "Điểm bất thường: Tổng doanh thu toàn cầu vẫn tăng trưởng kỷ lục 250% sau khi mất 20% thị trường." },
+          b2: { pill: "🏛️ 'Không Thể Buôn Lậu'", text: "Jensen Huang mỉa mai trên truyền thông: 'Một rack GPU AI nặng 2 tấn, gồm 1,5 triệu linh kiện, tiêu thụ 200kW điện và cần hạ tầng sân bóng đá mới chạy được. Buôn lậu là điều bất khả thi.'", diff: "Lỗ hổng ngụy biện: Đánh tráo khái niệm giữa cụm siêu máy chủ hoàn chỉnh và từng bo mạch GPU rời." },
+          b3: { pill: "🏛️ Official Cloud Partner", text: "Mega Speed được NVIDIA công nhận là Đối tác Đám mây Chính thức tại Đông Nam Á, được cấp quyền ưu tiên phân bổ hàng ngàn GPU H100 để xây dựng hạ tầng trung tâm dữ liệu độc lập.", diff: "Dấu hiệu vỏ bọc: Thành lập thần tốc ngay sau lệnh cấm, thuộc sở hữu BVI của Alice Huang." },
+          b4: { pill: "🏛️ Tụt Hậu 5 - 10 Năm", text: "Chính quyền Mỹ và các nhà phân tích tin rằng việc phong tỏa chip AI sẽ khiến các phòng nghiên cứu Trung Quốc bị đóng băng năng lực tính toán và tụt lại xa so với phương Tây.", diff: "Cú sốc thực tế: DeepSeek ra mắt R1 với hiệu năng ngang ngửa OpenAI o1 với chi phí đào tạo siêu rẻ." }
+        },
+        forensic: {
+          b1: { pill: "🚨 Doanh Thu Singapore Tăng 22%", text: "Singapore (chỉ 6 triệu dân) bất ngờ vọt lên thành thị trường lớn thứ 2 của NVIDIA, tiêu thụ tới 22% sản lượng toàn cầu (~10.3 tỷ USD/quý). Đây chính là kênh rửa doanh thu để tuồn chip ngược về Trung Quốc.", diff: "Bằng chứng dòng tiền: Doanh thu Singapore bùng nổ 400% chỉ trong 3 quý sau lệnh cấm vận." },
+          b2: { pill: "🚨 Bóc Tem Sê-ri Bằng Máy Sấy Tóc", text: "Điều tra của Financial Times & Bloomberg phơi bày: Các bo mạch GPU rời rạc được đưa vào các xưởng ngầm Đông Nam Á, dùng máy sấy tóc công nghiệp bóc tem sê-ri, dập lại mã hợp pháp rồi đưa thẳng vào Thâm Quyến.", diff: "Bằng chứng vật lý: Hải quan Thâm Quyến thu giữ hàng loạt card đồ họa có sê-ri bị cạo sửa tinh vi." },
+          b3: { pill: "🚨 Văn Phòng Ma Với 2 Nhân Viên", text: "Culper Research thị sát trụ sở Mega Speed tại Singapore: Văn phòng trống rỗng, không máy chủ, không kỹ sư, chỉ có đúng 2 nhân viên tiếp tân. Nhận hàng tỷ USD tiền tài trợ ngầm từ tập đoàn Alibaba.", diff: "Dấu hiệu gián điệp: Alice Huang (Huang Lee) đứng tên mua lại công ty chỉ vài ngày trước khi nhận chứng nhận từ Jensen." },
+          b4: { pill: "🚨 50.000 GPU H100 Tại DeepSeek", text: "Alexandr Wang (CEO Scale AI) xác nhận startup Trung Quốc DeepSeek đang vận hành bí mật cụm 50.000 chip NVIDIA H100 để đào tạo mô hình R1, xóa bỏ khoảng cách công nghệ với Mỹ xuống còn vài tháng.", diff: "Hậu quả an ninh: Lệnh cấm vận của Washington bị vô hiệu hóa hoàn toàn trên thực tế." }
+        }
+      },
+      en: {
+        official: {
+          b1: { pill: "🏛️ 10-K Filing: 0% Revenue", text: "NVIDIA formally claims 100% EAR compliance. Accelerated computing revenue in mainland China officially plummeted from 95% market share down to 0%, claiming zero China dependency.", diff: "Anomaly: Total global revenues continued skyrocketing 250% after writing off 20% of its global market." },
+          b2: { pill: "🏛️ 'Impossible to Smuggle'", text: "Jensen Huang ridiculed smuggling allegations: 'A full AI GPU datacenter rack weighs 2 tons, contains 1.5 million parts, draws 200kW, and requires a football stadium infrastructure. Smuggling is impossible.'", diff: "Strawman fallacy: Conflating an entire assembled datacenter rack with discrete bare-metal GPU accelerator boards." },
+          b3: { pill: "🏛️ Official Cloud Partner", text: "Mega Speed is certified as an Official NVIDIA Cloud Partner in Southeast Asia, prioritized with thousands of H100 allocations to construct legitimate sovereign cloud clusters.", diff: "Shell entity red flags: Spun off post-sanctions, owned by Alice Huang's BVI vehicle, and funded by Alibaba." },
+          b4: { pill: "🏛️ 5 - 10 Year Lag", text: "Washington policymakers assumed strict chip blockades would freeze Chinese AI research and maintain a multi-generation Western technological lead.", diff: "Strategic shock: DeepSeek launched R1 matching OpenAI o1 performance at a fraction of traditional computing cost." }
+        },
+        forensic: {
+          b1: { pill: "🚨 Singapore Consumes 22% of GPUs", text: "Singapore (population 6 million) miraculously surged into NVIDIA's second-largest global market, absorbing 22% of total GPU production ($10.3B/quarter). It served as the primary re-export routing node into mainland China.", diff: "Cash trail: Singapore cloud datacenter imports surged 400% within 3 quarters of the BIS export embargo." },
+          b2: { pill: "🚨 Heat-Gun De-Stamping in Transit", text: "Financial Times and Bloomberg field investigations revealed: GPU accelerators were dismantled into modular boards, stripped of serial numbers using industrial heat guns, restamped with legitimate markings, and trucked into Shenzhen.", diff: "Physical evidence: Border seizures in Hong Kong uncovered modified heatsinks with obliterated wafer IDs." },
+          b3: { pill: "🚨 Empty Shell Office with 2 Staff", text: "Culper Research on-site inspection confirmed Mega Speed's Singapore headquarters was completely devoid of hardware or engineering personnel—staffed by two receptionists while funded by billions from Alibaba's Apex.", diff: "Espionage ties: Alice Huang acquired 100% of the entity through a BVI shell immediately prior to receiving NVIDIA certification." },
+          b4: { pill: "🚨 50,000 H100s Powering DeepSeek", text: "Scale AI CEO Alexandr Wang and forensic intelligence confirmed DeepSeek secretly amassed an illicit cluster of 50,000 NVIDIA H100 GPUs, closing the technological gap with Silicon Valley to mere months.", diff: "Geopolitical impact: U.S. export controls were fundamentally compromised by commercial evasion networks." }
+        }
+      }
+    };
+
+    function switchDiscrepancy(mode, lang) {
+      const isOfficial = mode === "official";
+      const btnOff = document.getElementById(`btn-disc-official-${lang}`);
+      const btnForensic = document.getElementById(`btn-disc-forensic-${lang}`);
+      if (btnOff && btnForensic) {
+        btnOff.classList.toggle("active", isOfficial);
+        btnForensic.classList.toggle("active", !isOfficial);
+      }
+
+      const data = DISC_DATA[lang][mode];
+      for (let i = 1; i <= 4; i++) {
+        const item = data[`b${i}`];
+        const box = document.getElementById(`disc-box-${i}-${lang}`);
+        const pill = document.getElementById(`disc-pill-${i}-${lang}`);
+        const text = document.getElementById(`disc-text-${i}-${lang}`);
+        const diff = document.getElementById(`disc-diff-${i}-${lang}`);
+        
+        if (box) {
+          box.className = `disc-content-box mode-${mode}`;
+        }
+        if (pill) {
+          pill.className = `disc-status-pill pill-${mode}`;
+          pill.textContent = item.pill;
+        }
+        if (text) text.textContent = item.text;
+        if (diff) diff.innerHTML = `<strong>${isOfficial ? (lang === 'vi' ? 'Điểm bất thường:' : 'Anomaly:') : (lang === 'vi' ? 'Bằng chứng thực tế:' : 'Evidence trail:')}</strong> ${item.diff}`;
+      }
+    }
+    window.switchDiscrepancy = switchDiscrepancy;
+
+    // 2. Conduit Simulator Controller
+    const CONDUIT_DATA = {
+      vi: [
+        {
+          title: "Chặng 1: Bơm Vốn Ngầm Từ Đại Lục (Alibaba & Apex)",
+          cash: "Apex Enterprise Solutions (thuộc sở hữu của Alibaba) bơm hàng tỷ USD vốn tài trợ dưới danh nghĩa hợp đồng mua sắm hạ tầng đám mây quốc tế.",
+          hardware: "Chưa xuất hiện phần cứng thực tế. Toàn bộ là dòng tiền ủy thác offshore để che giấu chủ sở hữu hưởng lợi cuối cùng (UBO).",
+          evidence: "Bản cáo bạch tài chính của Seven Road Holdings ghi nhận khoản thoái vốn 100% của Mega Speed cho pháp nhân BVI của Alice Huang.",
+          law: "Đạo luật Quản lý Ngoại hối Trung Quốc & Đạo luật Minh bạch Doanh nghiệp Mỹ (Corporate Transparency Act)."
+        },
+        {
+          title: "Chặng 2: Vỏ Bọc Pháp Lý BVI (Huang Lee Limited & Alice Huang)",
+          cash: "Huang Lee Limited (đăng ký tại Quần đảo Virgin thuộc Anh - BVI) thanh toán tiền mặt để hoàn tất thâu tóm Mega Speed International.",
+          hardware: "Hợp đồng đặt mua hàng nghìn cụm GPU H100 được ký kết bí mật trước khi lệnh cấm vận tiếp theo có hiệu lực.",
+          evidence: "Alice Huang (tên pháp lý Huang Lee) đứng tên giám đốc duy nhất của pháp nhân BVI, trực tiếp điều hành mạng lưới mua sắm.",
+          law: "Quy chuẩn KYC ngân hàng quốc tế và Đạo luật Chống Rửa Tiền Liên bang (AML)."
+        },
+        {
+          title: "Chặng 3: Trạm Trung Chuyển Singapore (Mega Speed Cloud Partner)",
+          cash: "NVIDIA ghi nhận doanh thu xuất khẩu hợp pháp sang Singapore; doanh thu tại đây bùng nổ lên tới 22% toàn cầu (~10.3 tỷ USD/quý).",
+          hardware: "Hàng ngàn rack máy chủ NVIDIA H100 nguyên seal được xuất xưởng từ TSMC/Đài Loan và cập cảng Singapore hợp pháp.",
+          evidence: "Kiểm toán độc lập của Culper Research: Trụ sở Mega Speed tại Singapore hoàn toàn trống rỗng, chỉ có đúng 2 nhân viên trực ca.",
+          law: "Đạo luật Kiểm soát Xuất khẩu Mỹ (EAR - Export Administration Regulations)."
+        },
+        {
+          title: "Chặng 4: Xóa Tem Sê-ri & Tuồn Hàng Đông Nam Á",
+          cash: "Các công ty bình phong tại Hong Kong và Malaysia thanh toán phí vận chuyển ngầm với mức chênh lệch giá (cash premium) 50% - 100%.",
+          hardware: "Máy chủ GPU được tháo rời thành từng bo mạch, dùng máy sấy tóc công nghiệp cạo gỡ tem số sê-ri NVIDIA, dập mã giả rồi đưa vào Thâm Quyến.",
+          evidence: "Financial Times & Bloomberg ghi nhận hoạt động mua bán chip H100 công khai tại các chợ đen điện tử Hoa Cường Bắc.",
+          law: "Đạo luật Quyền lực Kinh tế Khẩn cấp Quốc tế (IEEPA - International Emergency Economic Powers Act)."
+        },
+        {
+          title: "Chặng 5: Cụm Siêu Máy Tính Ngầm 50.000 H100 (DeepSeek)",
+          cash: "Dòng tiền lợi nhuận khổng lồ được tái đầu tư vào các quỹ nghiên cứu AI của nhà nước Trung Quốc.",
+          hardware: "DeepSeek bí mật vận hành cụm 50.000 GPU H100 nguyên bản, tiêu thụ khoảng 50 Megawatts điện để huấn luyện mô hình R1.",
+          evidence: "Alexandr Wang (CEO Scale AI) xác nhận công khai trước Quốc hội và giới công nghệ về quy mô cụm máy chủ DeepSeek.",
+          law: "Vi phạm nghiêm trọng an ninh quốc gia Mỹ; dẫn tới cuộc điều tra hình sự của Cục Điều tra Liên bang (FBI)."
+        }
+      ],
+      en: [
+        {
+          title: "Stage 1: Covert Capital Inflow (Alibaba & Apex)",
+          cash: "Apex Enterprise Solutions (wholly backed by Alibaba) channels billions in disguised financing under international cloud expansion contracts.",
+          hardware: "No physical silicon deployed yet. Capital trails remain strictly financial and offshore to shield ultimate beneficial ownership (UBO).",
+          evidence: "Seven Road Holdings financial disclosures document the expedited sale of 100% of Mega Speed to Alice Huang's BVI vehicle.",
+          law: "U.S. Corporate Transparency Act, FinCEN anti-money laundering frameworks, and Chinese foreign exchange regulations."
+        },
+        {
+          title: "Stage 2: The BVI Offshore Shield (Huang Lee Limited)",
+          cash: "Huang Lee Limited (registered in the British Virgin Islands) executes cash transfers to finalize the acquisition of Mega Speed International.",
+          hardware: "Pre-order commitments for thousands of H100 clusters are locked in prior to expanded export control deadlines.",
+          evidence: "Corporate registries confirm Alice Huang (Huang Lee) as the sole director and beneficial shareholder of the BVI vehicle.",
+          law: "International banking Know-Your-Customer (KYC) compliance and federal Anti-Money Laundering (AML) statutes."
+        },
+        {
+          title: "Stage 3: The Singapore Transit Hub (Mega Speed Official Partner)",
+          cash: "NVIDIA books pristine export revenues to Singapore; regional sales surge to 22% of worldwide compute revenue ($10.3B/quarter).",
+          hardware: "Factory-sealed H100 server racks fabricated by TSMC in Taiwan arrive legitimately in Singaporean bonded warehouses.",
+          evidence: "Culper Research on-site forensic inspection: Mega Speed headquarters is an empty shell office with two administrative staff.",
+          law: "U.S. Export Administration Regulations (EAR) and Department of Commerce Bureau of Industry and Security (BIS) rules."
+        },
+        {
+          title: "Stage 4: Hardware De-Serialization & Covert Routing",
+          cash: "Intermediaries in Hong Kong, Malaysia, and Bangkok settle transport premiums of 50% to 100% in cash and offshore tether.",
+          hardware: "Server racks are broken down into discrete GPU boards; industrial heat guns peel off serial tracking labels before smuggling into Shenzhen.",
+          evidence: "Financial Times and Bloomberg undercover reporting document illicit H100 trading stalls in Huaqiangbei electronics markets.",
+          law: "International Emergency Economic Powers Act (IEEPA) criminal smuggling provisions."
+        },
+        {
+          title: "Stage 5: DeepSeek's Illicit 50,000-H100 Supercluster",
+          cash: "Capital efficiencies generated by covert hardware access fuel aggressive open-source model training and state subsidies.",
+          hardware: "DeepSeek activates a cluster of 50,000 covert H100 accelerators consuming ~50MW of power to train the revolutionary R1 model.",
+          evidence: "Scale AI CEO Alexandr Wang and national intelligence agencies confirm the active footprint of DeepSeek's accelerator farm.",
+          law: "Direct compromise of Western technological containment, precipitating full-scale FBI counterintelligence investigations."
+        }
+      ]
+    };
+
+    let conduitState = { vi: { step: 0, timer: null }, en: { step: 0, timer: null } };
+
+    function setConduitStep(stepIdx, lang) {
+      conduitState[lang].step = stepIdx;
+      const data = CONDUIT_DATA[lang][stepIdx];
+      
+      // Update step buttons
+      const stepper = document.getElementById(`conduit-stepper-${lang}`);
+      if (stepper) {
+        const btns = stepper.querySelectorAll(".sim-step-btn");
+        btns.forEach((b, idx) => b.classList.toggle("active", idx === stepIdx));
+      }
+
+      // Update flow graphic nodes
+      for (let i = 0; i < 5; i++) {
+        const node = document.getElementById(`node-${lang}-${i}`);
+        if (node) {
+          node.classList.toggle("active-node", i === stepIdx);
+        }
+      }
+
+      // Update inspector text
+      const cashEl = document.getElementById(`sim-flow-cash-${lang}`);
+      const hwEl = document.getElementById(`sim-flow-hardware-${lang}`);
+      const evEl = document.getElementById(`sim-flow-evidence-${lang}`);
+      const lawEl = document.getElementById(`sim-flow-law-${lang}`);
+
+      if (cashEl) cashEl.innerHTML = `<strong>${data.title}</strong><br/>${data.cash}`;
+      if (hwEl) hwEl.textContent = data.hardware;
+      if (evEl) evEl.textContent = data.evidence;
+      if (lawEl) lawEl.textContent = data.law;
+    }
+    window.setConduitStep = setConduitStep;
+
+    function nextConduitStep(lang) {
+      let next = (conduitState[lang].step + 1) % 5;
+      setConduitStep(next, lang);
+    }
+    window.nextConduitStep = nextConduitStep;
+
+    function prevConduitStep(lang) {
+      let prev = (conduitState[lang].step - 1 + 5) % 5;
+      setConduitStep(prev, lang);
+    }
+    window.prevConduitStep = prevConduitStep;
+
+    function toggleConduitPlay(lang) {
+      const btn = document.getElementById(`btn-play-conduit-${lang}`);
+      const textSpan = document.getElementById(`play-text-${lang}`);
+      
+      if (conduitState[lang].timer) {
+        clearInterval(conduitState[lang].timer);
+        conduitState[lang].timer = null;
+        if (textSpan) textSpan.textContent = lang === 'vi' ? "▶ Tự Động Trình Chiếu" : "▶ Auto-Play Simulation";
+        if (btn) btn.classList.remove("is-running");
+      } else {
+        nextConduitStep(lang);
+        conduitState[lang].timer = setInterval(() => nextConduitStep(lang), 3500);
+        if (textSpan) textSpan.textContent = lang === 'vi' ? "⏸ Tạm Dừng Trình Chiếu" : "⏸ Pause Simulation";
+        if (btn) btn.classList.add("is-running");
+      }
+    }
+    window.toggleConduitPlay = toggleConduitPlay;
+
+    // 3. Circular Capital Flywheel Controller
+    const FLYWHEEL_DATA = {
+      vi: [
+        {
+          title: "Trạm 1: NVIDIA Bơm Vốn Đầu Tư & Phân Bổ Hạn Ngạch GPU Hiếm",
+          desc: "Thay vì chỉ bán hàng thụ động, NVIDIA chủ động dùng kho tiền mặt khổng lồ để rót vốn đầu tư mạo hiểm vào các startup AI (CoreWeave, OpenAI, Nebius, Oracle). Đi kèm khoản đầu tư là quyền ưu tiên nhận hàng ngàn chip GPU H100 trong bối cảnh toàn cầu khan hiếm tột độ.",
+          risk: "NVIDIA đóng vai trò như 'Ngân Hàng Trung Ương', tự in tiền (GPU) để tạo lập thanh khoản thị trường và trói chặt khách hàng vào hệ sinh thái độc quyền CUDA."
+        },
+        {
+          title: "Trạm 2: Neoclouds & Startups Thế Chấp Hợp Đồng GPU Đi Vay Nợ",
+          desc: "Sau khi nhận cam kết phân bổ GPU từ NVIDIA, các Neoclouds mang chính số chip này ra làm tài sản thế chấp (asset-backed debt) để vay hàng tỷ USD nợ từ các quỹ đầu tư phố Wall như Blackstone, Magnetar và Carlyle.",
+          risk: "Tỷ lệ đòn bẩy tài chính cực cao. Các startup sẵn sàng chịu lãi suất 10-12% vì tin rằng nhu cầu tính toán AI sẽ mang lại siêu lợi nhuận vô tận."
+        },
+        {
+          title: "Trạm 3: Toàn Bộ Tiền Vay Được Dùng Để Mua Ngược Chip NVIDIA",
+          desc: "Toàn bộ số tiền vay nợ hàng tỷ USD không được dùng để nghiên cứu hay tuyển dụng, mà chảy ngược 100% về tài khoản của NVIDIA dưới hình thức các đơn đặt hàng máy chủ H100, H200 và Blackwell.",
+          risk: "NVIDIA bán chip với biên lợi nhuận gộp lên tới 75-80%. Cứ mỗi $1 tỷ USD bán ra, NVIDIA thu về $750 triệu USD lợi nhuận gộp thuần túy."
+        },
+        {
+          title: "Trạm 4: Doanh Thu Đỉnh Cao, Vốn Hóa $5.700 Tỷ & Tái Bơm Vốn",
+          desc: "NVIDIA công bố báo cáo tài chính đè bẹp mọi dự báo của Wall Street. Cổ phiếu NVDA bùng nổ, kéo vốn hóa lên đỉnh lịch sử $5.700 tỷ USD. Với túi tiền rủng rỉnh, NVIDIA lại có thêm hàng chục tỷ USD để tái đầu tư vào Trạm 1!",
+          risk: "Vòng lặp hoàn tất: Vốn đầu tư ban đầu của NVIDIA quay về túi dưới dạng doanh thu kỷ lục kèm đòn bẩy vốn hóa gấp 15 lần trên thị trường chứng khoán."
+        }
+      ],
+      en: [
+        {
+          title: "Station 1: Direct Equity Infusions & High-Priority GPU Allocations",
+          desc: "Rather than functioning as a passive component supplier, NVIDIA acts as lead investor into emerging AI cloud providers (CoreWeave, OpenAI, Nebius, Oracle). Crucially, the cash comes packaged with guaranteed allocation rights to scarce H100 accelerator clusters.",
+          risk: "NVIDIA functions as the de facto Central Bank of AI, printing liquidity (GPUs) to manufacture captive demand and lock partners into CUDA."
+        },
+        {
+          title: "Station 2: Asset-Backed Debt Financing Against GPU Collateral",
+          desc: "Armed with guaranteed hardware allocations, neoclouds pledge future GPU deliverables as debt collateral to secure billions in mezzanine debt from Wall Street titans like Blackstone, Magnetar, and Carlyle.",
+          risk: "Extreme financial leverage: Startups incur 10-12% debt service costs under the thesis of perpetual compute shortages."
+        },
+        {
+          title: "Station 3: 100% of Debt Recycled into Direct NVIDIA Hardware Orders",
+          desc: "The borrowed institutional billions bypass operational R&D and flow directly back onto NVIDIA's income statement as purchase orders for H100, H200, and next-generation Blackwell systems.",
+          risk: "NVIDIA captures staggering 75%+ gross margins, transforming Wall Street debt into pure high-margin corporate revenue."
+        },
+        {
+          title: "Station 4: Record Earnings, $5.7T Peak Market Cap & Re-Investment",
+          desc: "Quarterly earnings obliterate analyst expectations. NVDA stock surges, catapulting market valuation to an unprecedented $5.7T peak. Flush with cash reserves, NVIDIA re-initiates capital injections at Station 1!",
+          risk: "The flywheel closes: Initial cash equity returns as high-margin revenue multiplied by a 15x market cap multiple."
+        }
+      ]
+    };
+
+    function selectFlywheelNode(idx, lang) {
+      for (let i = 0; i < 4; i++) {
+        const node = document.getElementById(`fw-node-${lang}-${i}`);
+        if (node) node.classList.toggle("active", i === idx);
+      }
+      const data = FLYWHEEL_DATA[lang][idx];
+      const titleEl = document.getElementById(`fw-detail-title-${lang}`);
+      const descEl = document.getElementById(`fw-detail-desc-${lang}`);
+      const riskEl = document.getElementById(`fw-risk-${lang}`);
+
+      if (titleEl) titleEl.textContent = data.title;
+      if (descEl) descEl.textContent = data.desc;
+      if (riskEl) riskEl.textContent = data.risk;
+    }
+    window.selectFlywheelNode = selectFlywheelNode;
+
+    function pulseFlywheel(lang) {
+      const ring = document.getElementById(`flywheel-pulse-ring-${lang}`);
+      if (ring) {
+        ring.style.transition = "transform 1s ease";
+        ring.style.transformOrigin = "center";
+        ring.style.transform = "rotate(360deg)";
+        setTimeout(() => {
+          ring.style.transition = "none";
+          ring.style.transform = "rotate(0deg)";
+        }, 1100);
+      }
+      let current = 0;
+      const interval = setInterval(() => {
+        current = (current + 1) % 4;
+        selectFlywheelNode(current, lang);
+      }, 1800);
+      setTimeout(() => clearInterval(interval), 7500);
+    }
+    window.pulseFlywheel = pulseFlywheel;
+})();
+</script>
 </body>
 </html>
