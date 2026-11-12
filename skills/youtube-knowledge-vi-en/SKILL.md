@@ -6,11 +6,11 @@ description: >-
   Tự động xuất file HTML tương tác có nút chuyển đổi ngôn ngữ tức thì, 2 mục lục (TOC) độc lập, và Dual-Mode Visualizer (Bento + Mermaid)
   chuẩn mực cho cả 2 ngôn ngữ. Kích hoạt khi người dùng cung cấp URL YouTube hoặc yêu cầu học từ video.
 metadata:
-  version: "2.1.1"
+  version: "2.2.0"
   keywords: [youtube, tiếng việt, english, song ngữ, bilingual, mixed, vi-en, transcript, ghi chú, markdown, interactive html, bento, mermaid, knowledge]
 ---
 
-# YouTube Knowledge Learner — Bản Song Ngữ Tương Tác Cao Cấp (vi-en v2.1)
+# YouTube Knowledge Learner — Bản Song Ngữ Tương Tác Cao Cấp (vi-en v2.2)
 
 Sử dụng skill này để biến một video YouTube thành một kho tri thức tham khảo chuẩn mực hàng đầu **song ngữ hoàn chỉnh (Bilingual Dual-Language Architecture)**:
 
@@ -149,8 +149,10 @@ Tài liệu Markdown được tổ chức thành 2 phần rõ rệt:
 
 # PART 2: FULL ENGLISH VERSION (TECHNICAL & PRODUCT REFERENCE)
 
+# <Full English Title / Technical Reference Title>
+
 ## 1. Metadata & Quick Reference
-- Standard metadata table & granular timestamp index (15–25 timestamps).
+- Standard metadata table (including Document Title row) & granular timestamp index (15–25 timestamps).
 
 ## 2. Executive Summary
 - 5–6 high-level architectural & strategic takeaways.

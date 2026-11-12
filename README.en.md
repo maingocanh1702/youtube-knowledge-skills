@@ -171,17 +171,17 @@ python3 skills/youtube-knowledge-en/scripts/build_html.py "output/note.md" --lan
 youtube-knowledge-skills/
 ├── packages/                             # Ready-to-import .skill archives
 │   ├── youtube-knowledge-vi-en.skill
-│   ├── youtube-knowledge-vi-en-v2.1.1.skill
+│   ├── youtube-knowledge-vi-en-v2.2.0.skill
 │   ├── youtube-knowledge-vi.skill
-│   ├── youtube-knowledge-vi-v1.0.1.skill
+│   ├── youtube-knowledge-vi-v1.0.2.skill
 │   ├── youtube-knowledge-en.skill
-│   ├── youtube-knowledge-en-v1.0.1.skill
+│   ├── youtube-knowledge-en-v1.0.2.skill
 │   ├── youtube-knowledge-vi-en-lite.skill
 │   └── youtube-knowledge-vi-en-lite-v1.0.0.skill
 ├── skills/                               # Source of each skill
-│   ├── youtube-knowledge-vi-en/          # Interactive bilingual (v2.1.1)
-│   ├── youtube-knowledge-vi/             # Pure Vietnamese (v1.0.1)
-│   ├── youtube-knowledge-en/             # Pure English (v1.0.1)
+│   ├── youtube-knowledge-vi-en/          # Interactive bilingual (v2.2.0)
+│   ├── youtube-knowledge-vi/             # Pure Vietnamese (v1.0.2)
+│   ├── youtube-knowledge-en/             # Pure English (v1.0.2)
 │   └── youtube-knowledge-vi-en-lite/     # Lite, Vietnamese + English (v1.0.0)
 ├── CHANGELOG.md
 ├── LICENSE

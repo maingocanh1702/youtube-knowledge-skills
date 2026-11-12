@@ -6,7 +6,7 @@ description: >-
   Gold Standard (Molly Graham Benchmark) with Dual-Mode Visualizer (Bento + Mermaid) and interactive
   HTML export. Trigger when the user wants pure English notes from a YouTube video.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   keywords: [youtube, english, pure english, reference, transcript, notes, markdown, interactive html, bento, mermaid, knowledge]
 ---
 

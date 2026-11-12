@@ -7,7 +7,7 @@ description: >-
   Kích hoạt khi người dùng cung cấp URL YouTube và muốn ghi chú kiến thức thuần Việt.
   Nếu cần giữ thuật ngữ chuyên ngành tiếng Anh, dùng skill youtube-knowledge-vi-en.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   keywords: [youtube, tiếng việt, vietnamese, pure, vi, transcript, ghi chú, markdown, knowledge]
 ---
 

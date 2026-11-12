@@ -152,15 +152,15 @@ python3 skills/youtube-knowledge-en/scripts/build_html.py "output/note.md" --lan
 youtube-knowledge-skills/
 ├── packages/                             # File nén .skill sẵn sàng import/cài đặt
 │   ├── youtube-knowledge-vi-en.skill
-│   ├── youtube-knowledge-vi-en-v2.1.1.skill
+│   ├── youtube-knowledge-vi-en-v2.2.0.skill
 │   ├── youtube-knowledge-vi.skill
-│   ├── youtube-knowledge-vi-v1.0.1.skill
+│   ├── youtube-knowledge-vi-v1.0.2.skill
 │   ├── youtube-knowledge-en.skill
-│   ├── youtube-knowledge-en-v1.0.1.skill
+│   ├── youtube-knowledge-en-v1.0.2.skill
 │   ├── youtube-knowledge-vi-en-lite.skill
 │   └── youtube-knowledge-vi-en-lite-v1.0.0.skill
 ├── skills/                               # Mã nguồn chi tiết từng skill
-│   ├── youtube-knowledge-vi-en/          # Skill Song ngữ tương tác (v2.1.1)
+│   ├── youtube-knowledge-vi-en/          # Skill Song ngữ tương tác (v2.2.0)
 │   │   ├── SKILL.md
 │   │   ├── references/system-map-template.md
 │   │   └── scripts/
@@ -168,8 +168,9 @@ youtube-knowledge-skills/
 │   │       ├── build_bilingual_html.py
 │   │       ├── flow_viewer.py
 │   │       ├── md_render.py
-│   │       └── template.html
-│   ├── youtube-knowledge-vi/             # Skill Thuần tiếng Việt (v1.0.1)
+│   │       ├── template.html
+│   │       └── test_build_bilingual_html.py
+│   ├── youtube-knowledge-vi/             # Skill Thuần tiếng Việt (v1.0.2)
 │   │   ├── SKILL.md
 │   │   ├── references/system-map-template.md
 │   │   └── scripts/
@@ -178,7 +179,7 @@ youtube-knowledge-skills/
 │   │       ├── flow_viewer.py
 │   │       ├── md_render.py
 │   │       └── template.html
-│   ├── youtube-knowledge-en/             # Skill Thuần tiếng Anh (v1.0.1)
+│   ├── youtube-knowledge-en/             # Skill Thuần tiếng Anh (v1.0.2)
 │   │   ├── SKILL.md
 │   │   ├── references/system-map-template.md
 │   │   └── scripts/

@@ -129,8 +129,12 @@ def prepare_bilingual_template(template_path: Optional[Path] = None) -> str:
         '<button class="icon-btn toc-mobile-trigger" id="toc-toggle" onclick="openToc()" aria-label="Mục lục / Table of Contents" title="Mục lục / Table of Contents">',
     )
     tpl = tpl.replace(
+        '<aside class="rail toc" id="toc" data-reveal="" aria-label="{{TOC_TITLE}}">',
+        '<aside class="rail toc" id="toc" data-reveal="" aria-label="Mục lục / Table of Contents">',
+    )
+    tpl = tpl.replace(
         '<aside class="toc" id="toc" aria-label="{{TOC_TITLE}}">',
-        '<aside class="toc" id="toc" aria-label="Mục lục / Table of Contents">',
+        '<aside class="rail toc" id="toc" data-reveal="" aria-label="Mục lục / Table of Contents">',
     )
     tpl = tpl.replace(
         '<p class="toc-title">{{TOC_TITLE}}</p>',
@@ -321,6 +325,11 @@ def prepare_bilingual_template(template_path: Optional[Path] = None) -> str:
       if (flowView && flowView.classList.contains("active")) {
         renderMermaid(suffix);
       }
+
+      // Re-trigger scroll spy to sync active headings and sub-accordions in new language
+      try {
+        window.dispatchEvent(new Event("scroll"));
+      } catch (e) {}
     }
     window.setLanguage = setLanguage;
 
@@ -373,7 +382,7 @@ def prepare_bilingual_template(template_path: Optional[Path] = None) -> str:
       injectCopyButtons();
       renderMermaid();
       setupTocSpy();
-      setupScrollProgress();
+      setupRailProgress();
     });"""
 
     new_boot_code = """    // ---------- Boot ----------
@@ -384,7 +393,7 @@ def prepare_bilingual_template(template_path: Optional[Path] = None) -> str:
       injectCopyButtons();
       renderMermaid();
       setupTocSpy();
-      setupScrollProgress();
+      setupRailProgress();
     });"""
     if old_boot_code not in tpl:
         raise RuntimeError("md2html template changed: Boot block not found, cannot inject restoreLanguage().")
@@ -450,6 +459,12 @@ def assemble_bilingual_document(
     html = re.sub(
         r'<p class="doc-subtitle">.*?</p>',
         f'<p class="doc-subtitle"><span class="vi-only">{subtitle_vi}</span><span class="en-only">{subtitle_en}</span></p>',
+        html,
+    )
+    # Replace sticky railTitle in TOC rail (claude.dev style)
+    html = re.sub(
+        r'<div class="rail-title" id="railTitle">.*?</div>',
+        f'<div class="rail-title" id="railTitle"><span class="vi-only">{title_vi}</span><span class="en-only">{title_en}</span></div>',
         html,
     )
 
@@ -609,7 +624,7 @@ def compile_bilingual_html(
     title_en = (
         title_en
         or en_part_title
-        or _metadata_value(en_md, r"^(video\s+)?title\b")
+        or _metadata_value(en_md, r"^(video\s+|doc(ument)?\s+)?title\b")
         or _metadata_value(vi_md, r"tiêu đề")
         or title_vi
     )

@@ -211,52 +211,197 @@
     .content { min-width: 0; }
 
     /* ============================================================
-       TOC (desktop + mobile drawer)
+       ANTHROPIC RAIL TOC (claude.dev template)
        ============================================================ */
-    .toc {
+    .top-prog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--accent);
+      z-index: 1001;
+      transition: width 0.08s linear;
+      pointer-events: none;
+    }
+
+    .rail {
+      font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+      display: flex;
+      flex-direction: column;
       position: sticky;
       top: 80px;
       align-self: start;
       max-height: calc(100vh - 100px);
       overflow-y: auto;
-      padding-right: 8px;
+      overflow-x: hidden;
+      padding-right: 12px;
+      padding-bottom: 24px;
+      margin-top: -2px;
     }
-    .toc::-webkit-scrollbar { width: 6px; }
-    .toc::-webkit-scrollbar-track { background: transparent; }
-    .toc::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
-    .toc-head {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 12px 12px;
+    .rail::-webkit-scrollbar { width: 4px; }
+    .rail::-webkit-scrollbar-track { background: transparent; }
+    .rail::-webkit-scrollbar-thumb { background: var(--border-strong, #ccc); border-radius: 2px; }
+
+    .rail-mobile-head { display: none; }
+
+    .rail-title {
+      font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+      font-weight: 600;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: var(--text);
+      text-wrap: balance;
+      opacity: 0;
+      max-height: 0;
+      margin-bottom: 0;
+      transform: translateY(8px);
+      overflow: hidden;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), max-height 0.35s ease, margin 0.35s ease;
     }
-    .toc-title {
+    .rail-title.on {
+      opacity: 1;
+      max-height: 160px;
+      margin-bottom: 20px;
+      transform: none;
+    }
+
+    .rail .th {
+      font-family: var(--font-mono, monospace);
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+      margin-bottom: 12px;
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-subtle);
-      margin: 0;
+      line-height: normal;
     }
-    .toc-close { display: none; }
-    .toc-nav { display: flex; flex-direction: column; gap: 2px; }
-    .toc-nav a {
-      display: flex; align-items: center;
-      min-height: 36px;
-      padding: 8px 14px;
+
+    .rail .tree, .rail .toc-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .rail a {
+      width: fit-content;
+      max-width: 100%;
+      font-family: var(--font-mono, monospace);
+      font-size: 12.5px;
+      line-height: 1.5;
       color: var(--text-muted);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 2.5px 0;
+      display: block;
+      overflow: hidden;
       text-decoration: none;
-      font-size: 13.5px;
-      border-left: 2px solid transparent;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      transition: color 0.15s, background-color 0.15s, border-color 0.15s;
-      line-height: 1.4;
+      transition: color 0.15s ease;
+      border: none;
+      background: transparent;
+      border-radius: 0;
     }
-    .toc-nav a.active {
+
+    .rail a:hover {
+      color: var(--text);
+      background: transparent;
+    }
+
+    .rail a.on, .rail a.active {
+      color: var(--text);
+      font-weight: 600;
+      background: transparent;
+      border: none;
+    }
+
+    .rail a .br {
+      color: var(--text-subtle);
+      margin-right: 8px;
+      opacity: 0.6;
+      font-weight: 400;
+      display: inline-block;
+    }
+
+    .rail a:hover .br {
+      opacity: 1;
+      color: var(--text-muted);
+    }
+
+    .rail a.on .br, .rail a.active .br {
       color: var(--accent);
-      border-left-color: var(--accent);
-      background: var(--accent-soft);
+      opacity: 1;
+      font-weight: 700;
+    }
+
+    .rail a.sub, .rail a.lvl-3 {
+      padding-left: 18px;
+      font-size: 11.5px;
+    }
+
+    .rail .subs {
+      visibility: hidden;
+      grid-template-rows: 0fr;
+      display: grid;
+    }
+
+    .rail .subs.open,
+    .rail .subs:has(:focus-visible) {
+      visibility: visible;
+      grid-template-rows: 1fr;
+    }
+
+    .rail .subs > div {
+      pointer-events: none;
+      min-height: 0;
+      margin: -2px;
+      padding: 2px;
+      overflow: hidden;
+    }
+
+    .rail .subs a {
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .rail .subs {
+        transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+      }
+    }
+
+    .rail .prog {
+      font-family: var(--font-mono, monospace);
+      font-size: 11.5px;
+      color: var(--text-subtle);
+      white-space: nowrap;
+      margin-top: 24px;
+      overflow: hidden;
+      letter-spacing: 0.02em;
+      user-select: none;
+      display: block;
+    }
+
+    .rail .prog b {
+      color: var(--accent);
       font-weight: 500;
     }
-    .toc-nav a.lvl-3 { padding-left: 26px; font-size: 12.5px; }
+
+    .rail .pct {
+      color: var(--text-muted);
+      margin-left: 8px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .rail .rail-time {
+      font-family: var(--font-mono, monospace);
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+      margin-top: 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      display: block;
+    }
+
     .toc-backdrop {
       display: none;
       position: fixed; inset: 0;
@@ -264,6 +409,63 @@
       z-index: var(--z-backdrop);
       opacity: 0;
       transition: opacity 0.2s;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+        padding: 20px 16px 64px;
+        gap: 32px;
+      }
+      .rail {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 320px;
+        max-width: 85vw;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+        z-index: var(--z-drawer);
+        padding: 20px 16px;
+        max-height: 100vh;
+        overflow-y: auto;
+        transform: translateX(-100%);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      body.toc-open .rail {
+        transform: translateX(0);
+      }
+      .rail-mobile-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .rail-mobile-head .th {
+        margin-bottom: 0;
+      }
+      .rail-mobile-head .toc-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: var(--radius-sm);
+      }
+      .rail-title {
+        display: block !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        margin-bottom: 16px !important;
+        transform: none !important;
+      }
     }
 
     /* ============================================================
@@ -842,7 +1044,7 @@
        ============================================================ */
     @media (hover: hover) {
       .icon-btn:hover { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
-      .toc-nav a:hover { color: var(--accent); background: var(--accent-soft); }
+      .toc-nav a:hover, .rail a:hover { color: var(--text); background: transparent; }
       .content a:hover { color: var(--accent-hover); border-bottom-color: var(--accent); }
       .compare-card:hover { border-color: var(--accent-border); box-shadow: var(--shadow); }
       .compare-card.recommended:hover { border-color: var(--accent); }
@@ -1438,6 +1640,9 @@
     <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
   </svg>
 
+  <!-- Pinned Top Reading Progress Bar -->
+  <div id="topProg" class="top-prog"></div>
+
   <!-- Topbar -->
   <header class="topbar">
     <div class="topbar-inner">
@@ -1463,16 +1668,20 @@
   <div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
 
   <div class="layout">
-    <aside class="toc" id="toc" aria-label="{{TOC_TITLE}}">
-      <div class="toc-head">
-        <p class="toc-title">{{TOC_TITLE}}</p>
+    <aside class="rail toc" id="toc" data-reveal="" aria-label="{{TOC_TITLE}}">
+      <div class="rail-mobile-head">
+        <span class="th"><span class="vi-only">CẤU TRÚC / TREE</span><span class="en-only">TREE</span></span>
         <button class="toc-close" onclick="closeToc()" aria-label="{{CLOSE_LABEL}}">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-x"/></svg>
         </button>
       </div>
-      <nav class="toc-nav" id="toc-nav">
+      <div class="rail-title" id="railTitle">{{TITLE}}</div>
+      <div class="th"><span class="vi-only">CẤU TRÚC / TREE</span><span class="en-only">TREE</span></div>
+      <nav class="tree toc-nav" id="toc-nav">
         <!-- TOC_ENTRIES -->
       </nav>
+      <div class="prog" id="prog"><b></b>░░░░░░░░░░░░░░░░░░░░░░░░░░░░<span class="pct">00%</span></div>
+      <div class="rail-time" id="railTime">{{READ_TIME}}</div>
     </aside>
 
     <main class="content" id="main">
@@ -1586,34 +1795,106 @@
       if (e.key === "Escape" && document.body.classList.contains("toc-open")) closeToc();
     });
 
-    // ---------- TOC scrollspy ----------
+    // ---------- Anthropic Rail Progress & Sticky Title Controller ----------
+    function setupRailProgress() {
+      const topProg = document.getElementById("topProg");
+      const progEl = document.getElementById("prog");
+      const railTitle = document.getElementById("railTitle");
+      const heroTitle = document.querySelector(".doc-title");
+
+      const updateProgress = () => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = totalHeight > 0 ? Math.max(0, Math.min(1, window.scrollY / totalHeight)) : 0;
+        const pct = Math.round(ratio * 100);
+
+        if (topProg) {
+          topProg.style.width = `${ratio * 100}%`;
+        }
+
+        if (progEl) {
+          const filled = Math.round(28 * ratio);
+          const unfilled = 28 - filled;
+          progEl.innerHTML = `<b>${"▓".repeat(filled)}</b>${"░".repeat(unfilled)}<span class="pct">${String(pct).padStart(2, "0")}%</span>`;
+        }
+
+        if (heroTitle && railTitle) {
+          const isPast = heroTitle.getBoundingClientRect().bottom < 20;
+          railTitle.classList.toggle("on", isPast);
+        }
+      };
+
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      updateProgress();
+    }
+
+    // ---------- TOC scrollspy & dynamic sub-accordion ----------
     function setupTocSpy() {
-      const links = document.querySelectorAll("#toc-nav a[href^='#']");
-      if (!links.length) {
-        const toc = document.getElementById("toc");
-        if (toc) toc.style.display = "none";
-        return;
-      }
-      const map = new Map();
-      links.forEach(a => {
-        const id = a.getAttribute("href").slice(1);
-        const el = document.getElementById(id);
-        if (el) map.set(el, a);
+      const getActiveContainer = () => {
+        const lang = document.documentElement.dataset.lang || "vi";
+        if (lang === "en") {
+          const enCont = document.getElementById("toc-links-en");
+          if (enCont) return enCont;
+        }
+        return document.getElementById("toc-links-vi") || document.querySelector(".rail .tree, .rail .toc-nav");
+      };
+
+      const allLinks = document.querySelectorAll(".rail a[href^='#'], .toc a[href^='#']");
+      if (!allLinks.length) return;
+
+      allLinks.forEach(a => {
         a.addEventListener("click", () => {
           if (window.matchMedia("(max-width: 900px)").matches) closeToc();
-        });
-      });
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(en => {
-          const link = map.get(en.target);
-          if (!link) return;
-          if (en.isIntersecting) {
-            links.forEach(l => l.classList.remove("active"));
-            link.classList.add("active");
+          const nextSubs = a.nextElementSibling;
+          if (nextSubs && nextSubs.classList.contains("subs")) {
+            nextSubs.classList.add("open");
+            a.setAttribute("aria-expanded", "true");
           }
         });
-      }, { rootMargin: "-80px 0px -70% 0px", threshold: 0 });
-      map.forEach((_, el) => obs.observe(el));
+      });
+
+      const updateActiveLink = () => {
+        const container = getActiveContainer();
+        if (!container) return;
+
+        const links = container.querySelectorAll("a[href^='#']");
+        if (!links.length) return;
+
+        let activeIdx = 0;
+        const scrollThreshold = window.innerHeight * 0.38;
+
+        links.forEach((a, idx) => {
+          const id = a.getAttribute("href").slice(1);
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top < scrollThreshold) {
+            activeIdx = idx;
+          }
+        });
+
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 30) {
+          activeIdx = links.length - 1;
+        }
+
+        links.forEach((a, idx) => {
+          const isActive = idx === activeIdx;
+          a.classList.toggle("on", isActive);
+          a.classList.toggle("active", isActive);
+        });
+
+        const activeLink = links[activeIdx];
+        const allSubs = container.querySelectorAll(".subs");
+        allSubs.forEach(subs => {
+          const parent = subs.previousElementSibling;
+          const isOpen = (parent === activeLink) || subs.contains(activeLink);
+          subs.classList.toggle("open", isOpen);
+          if (parent) {
+            parent.setAttribute("aria-expanded", String(isOpen));
+          }
+        });
+      };
+
+      window.addEventListener("scroll", updateActiveLink, { passive: true });
+      window.addEventListener("resize", updateActiveLink, { passive: true });
+      updateActiveLink();
     }
 
     // ---------- Anchor links on h2/h3 ----------
@@ -1722,7 +2003,7 @@
       injectCopyButtons();
       renderMermaid();
       setupTocSpy();
-      setupScrollProgress();
+      setupRailProgress();
     });
   </script>
 </body>

@@ -6,10 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [v2.3.0] - 2026-11-12
 
 ### Added
-- `README.en.md`: full English version of the README, linked from `README.md`.
+- **Claude.dev Rail TOC with Dynamic Sub-Accordions**:
+  - Adopted Anthropic's `claude.dev` rail TOC architecture across all skills (`youtube-knowledge-vi-en` v2.2.0, `youtube-knowledge-vi` v1.0.2, `youtube-knowledge-en` v1.0.2).
+  - Default TOC view displays top-level sections with clean branch markers (`└`).
+  - H3 sub-headings are wrapped in dynamic sub-accordions (`.subs`) that automatically expand on scrollspy when entering that section, and collapse when scrolling away.
+  - Smooth animation via CSS Grid (`grid-template-rows: 0fr` ↔ `1fr`) without layout jump.
+  - Sticky TOC rail progress bar with ASCII block rail (`prog`) and percentage counter.
+  - Streamlined TOC topbar (omitted redundant share button for local reference notes).
+- **LaTeX Math Symbol Auto-Converter (`md_render.py`)**:
+  - Automatically converts common LaTeX math notations in prose (outside backtick code spans) to clean Unicode characters: `$\to$` → `→`, `$\times$` → `×`, `$\ge$` → `≥`, `$\le$` → `≤`, `$\approx$` → `≈`, `$\ne$` → `≠`, `$\pm$` → `±`, `$\infty$` → `∞`, etc.
+  - Prevents raw LaTeX markup from displaying unformatted when MathJax/KaTeX is not embedded.
+- **Explicit English Title & Document Title Extraction**:
+  - Updated `SKILL.md` to mandate `# <Full English Title / Technical Reference Title>` directly under `# PART 2: FULL ENGLISH VERSION`.
+  - Added support for `Document Title` / `Doc Title` row in Part 2 metadata table.
+  - Improved `build_bilingual_html.py` title regex to `r"^(video\s+|doc(ument)?\s+)?title\b"`, ensuring English view title remains strictly English.
+  - Trigger `window.dispatchEvent(new Event("scroll"))` on language switch to instantly synchronize active rail TOC headings and open sub-accordions.
+- **English README (`README.en.md`)**: Full English version of documentation, linked from `README.md`.
+- **Pre-packaged Archives**:
+  - Added `packages/youtube-knowledge-vi-en-v2.2.0.skill` and refreshed `packages/youtube-knowledge-vi-en.skill`.
+  - Added `packages/youtube-knowledge-vi-v1.0.2.skill` and refreshed `packages/youtube-knowledge-vi.skill`.
+  - Added `packages/youtube-knowledge-en-v1.0.2.skill` and refreshed `packages/youtube-knowledge-en.skill`.
+- **Expanded Test Suite**: 27 unit tests in `skills/youtube-knowledge-vi-en/scripts/test_build_bilingual_html.py` covering inline math conversion, sub-accordion TOC generation, and bilingual assembly.
 
 ### Changed
 - README: removed the "recommended" label from the Google Antigravity IDE install option, added the lite package to the `.skill` list, and made the license note in the credits neutral.

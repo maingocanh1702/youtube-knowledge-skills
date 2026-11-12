@@ -53,6 +53,11 @@ class InlineTests(unittest.TestCase):
         self.assertIn('<a href="https://youtu.be/abc"', out)
         self.assertTrue(out.endswith("</a>."))
 
+    def test_latex_symbols_to_unicode(self):
+        out = render_inline("A $\\to$ B $\\times$ C $\\ge 8$ và `$\\to$`")
+        self.assertIn("A → B × C ≥ 8", out)
+        self.assertIn("<code>$\\to$</code>", out)
+
 
 class BlockTests(unittest.TestCase):
     def test_standard_section_ids_and_suffix(self):
@@ -73,8 +78,11 @@ class BlockTests(unittest.TestCase):
         r.render("## 2. Executive Summary\n### Ý 1\n## 5. Deep Dive\n### 5.1 A\n## 6. Playbooks\n### Playbook 1: B")
         toc = r.toc_html()
         self.assertNotIn("Ý 1", toc)
-        self.assertIn('class="lvl-3">5.1 A', toc)
-        self.assertIn('class="lvl-3">Playbook 1: B', toc)
+        self.assertIn('class="lvl-3"><span class="br">└</span>5.1 A', toc)
+        self.assertIn('class="lvl-3"><span class="br">└</span>Playbook 1: B', toc)
+        # Dynamic sub-accordion wrapping for Anthropic-style rail TOC
+        self.assertIn('<div class="subs">\n  <div>\n    <a href="#5-1-a" class="lvl-3"><span class="br">└</span>5.1 A</a>\n  </div>\n</div>', toc)
+        self.assertIn('<div class="subs">\n  <div>\n    <a href="#playbook-1-b" class="lvl-3"><span class="br">└</span>Playbook 1: B</a>\n  </div>\n</div>', toc)
 
     def test_table_alignment_and_pipe_in_code(self):
         md = "| A | B |\n| :--- | ---: |\n| `x|y` | **2** |"

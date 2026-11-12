@@ -106,6 +106,34 @@ def render_inline(text: str) -> str:
         lambda m: keep("<code>" + html.escape(m.group(2).strip(), quote=False) + "</code>"),
         text,
     )
+    # 1b. Common LaTeX math symbols to Unicode (outside code spans)
+    _latex_symbols = {
+        r"\to": "→",
+        r"\rightarrow": "→",
+        r"\leftarrow": "←",
+        r"\leftrightarrow": "↔",
+        r"\Rightarrow": "⇒",
+        r"\Leftarrow": "⇐",
+        r"\Leftrightarrow": "⇔",
+        r"\times": "×",
+        r"\cdot": "·",
+        r"\pm": "±",
+        r"\mp": "∓",
+        r"\ge": "≥",
+        r"\geq": "≥",
+        r"\le": "≤",
+        r"\leq": "≤",
+        r"\neq": "≠",
+        r"\ne": "≠",
+        r"\approx": "≈",
+        r"\sim": "~",
+        r"\dots": "…",
+        r"\cdots": "…",
+        r"\infty": "∞",
+    }
+    for _sym, _char in _latex_symbols.items():
+        _pat = r"\$\s*" + re.escape(_sym) + r"(?:\s+([^$]+))?\s*\$"
+        text = re.sub(_pat, lambda m, c=_char: c + (" " + m.group(1).strip() if m.group(1) else ""), text)
     # 2. Backslash escapes
     text = re.sub(
         r"\\([\\`*_{}\[\]()#+\-.!|~<>])",
@@ -196,13 +224,28 @@ class MarkdownRenderer:
         return self._blocks(text.split("\n"))
 
     def toc_html(self) -> str:
-        links = []
+        links: List[str] = []
+        open_subs = False
+
         for level, anchor, label, in_toc in self.headings:
             if not in_toc:
                 continue
-            links.append(
-                f'<a href="#{anchor}" class="lvl-{level}">{html.escape(label, quote=False)}</a>'
-            )
+
+            escaped_label = html.escape(label, quote=False)
+            if level <= 2:
+                if open_subs:
+                    links.append("  </div>\n</div>")
+                    open_subs = False
+                links.append(f'<a href="#{anchor}" class="lvl-2"><span class="br">└</span>{escaped_label}</a>')
+            else:
+                if not open_subs:
+                    links.append('<div class="subs">\n  <div>')
+                    open_subs = True
+                links.append(f'    <a href="#{anchor}" class="lvl-{level}"><span class="br">└</span>{escaped_label}</a>')
+
+        if open_subs:
+            links.append("  </div>\n</div>")
+
         return "\n".join(links)
 
     # ---- block dispatcher ---------------------------------------------------
