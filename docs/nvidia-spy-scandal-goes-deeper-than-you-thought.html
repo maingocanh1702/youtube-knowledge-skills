@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" data-lang="vi" data-theme="light" style="--rec-label: '★ Đề xuất / Recommended'">
+<html lang="en" data-lang="en" data-theme="light" style="--rec-label: '★ Đề xuất / Recommended'">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2380,8 +2380,8 @@
       
       <div class="topbar-actions">
         <div class="lang-switcher" role="group" aria-label="Language selection">
-          <button class="lang-btn active" id="btn-lang-vi" onclick="setLanguage('vi')" title="Chuyển sang Tiếng Việt" aria-pressed="true">🇻🇳 VI</button>
-          <button class="lang-btn" id="btn-lang-en" onclick="setLanguage('en')" title="Switch to English" aria-pressed="false">🇬🇧 EN</button>
+          <button class="lang-btn" id="btn-lang-vi" onclick="setLanguage('vi')" title="Chuyển sang Tiếng Việt" aria-pressed="false">🇻🇳 VI</button>
+          <button class="lang-btn active" id="btn-lang-en" onclick="setLanguage('en')" title="Switch to English" aria-pressed="true">🇬🇧 EN</button>
         </div>
 
         <button class="icon-btn" onclick="window.print()" title="In / Lưu PDF / Print" aria-label="In / Lưu PDF / Print">
@@ -4605,7 +4605,7 @@ MAINTAIN AN EVIDENCE-DRIVEN, UNCOMPROMISING, FORENSIC TONE. DISREGARD ALL MARKET
       if (typeof mermaid === "undefined") return;
       if (!initMermaid()) return;
       try {
-        const lang = document.documentElement.dataset.lang || "vi";
+        const lang = document.documentElement.dataset.lang || "en";
         const suffix = (forcedSuffix !== undefined) ? forcedSuffix : ((lang === "en") ? "-en" : "");
         const nodes = [];
 
@@ -4694,7 +4694,7 @@ MAINTAIN AN EVIDENCE-DRIVEN, UNCOMPROMISING, FORENSIC TONE. DISREGARD ALL MARKET
     // ---------- TOC scrollspy & dynamic sub-accordion ----------
     function setupTocSpy() {
       const getActiveContainer = () => {
-        const lang = document.documentElement.dataset.lang || "vi";
+        const lang = document.documentElement.dataset.lang || "en";
         if (lang === "en") {
           const enCont = document.getElementById("toc-links-en");
           if (enCont) return enCont;
@@ -4814,9 +4814,9 @@ MAINTAIN AN EVIDENCE-DRIVEN, UNCOMPROMISING, FORENSIC TONE. DISREGARD ALL MARKET
     }
 
     // ---------- Dual-Language Runtime Switcher ----------
-    const LANG_STORAGE_KEY = "youtube-learner-lang";
+    const LANG_STORAGE_KEY = "youtube-learner-lang-v2";
     function setLanguage(lang) {
-      if (lang !== "en" && lang !== "vi") lang = "vi";
+      if (lang !== "en" && lang !== "vi") lang = "en";
       document.documentElement.dataset.lang = lang;
       document.documentElement.lang = lang;
       try {
@@ -4848,9 +4848,9 @@ MAINTAIN AN EVIDENCE-DRIVEN, UNCOMPROMISING, FORENSIC TONE. DISREGARD ALL MARKET
     window.setLanguage = setLanguage;
 
     function restoreLanguage() {
-      let saved = "vi";
+      let saved = "en";
       try {
-        saved = localStorage.getItem(LANG_STORAGE_KEY) || "vi";
+        saved = localStorage.getItem(LANG_STORAGE_KEY) || "en";
       } catch (e) {}
       setLanguage(saved);
     }
