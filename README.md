@@ -86,9 +86,19 @@ claude plugin marketplace add maingocanh1702/youtube-knowledge-skills
 claude plugin install youtube-knowledge@youtube-knowledge-skills
 ```
 
-Cập nhật bản mới: `claude plugin update youtube-knowledge@youtube-knowledge-skills`. Plugin gồm đủ 4 skill (`youtube-knowledge-vi-en-lite`, `-vi-en`, `-vi`, `-en`); khi gọi đích danh, tên có tiền tố plugin, ví dụ `youtube-knowledge:youtube-knowledge-vi-en-lite`.
+Kiểm tra, cập nhật, gỡ:
+
+```bash
+claude plugin details youtube-knowledge        # phải thấy Skills (4)
+claude plugin update youtube-knowledge@youtube-knowledge-skills
+claude plugin uninstall youtube-knowledge@youtube-knowledge-skills
+```
+
+Plugin gồm đủ 4 skill (`youtube-knowledge-vi-en-lite`, `-vi-en`, `-vi`, `-en`). Khi gọi đích danh, tên có tiền tố plugin, ví dụ `youtube-knowledge:youtube-knowledge-vi-en-lite`.
 
 **Claude.ai / Claude Desktop / Cowork**
+
+Cách nhanh: vào **Customize → Plugins** và thêm marketplace GitHub `maingocanh1702/youtube-knowledge-skills` (nếu không thấy mục này trên gói của bạn, dùng cách upload file bên dưới). Cách upload file:
 
 1. Vào **Settings → Capabilities** và bật *Code execution and file creation*.
 2. Vào **Customize → Skills → `+` → Upload a skill**.
@@ -103,7 +113,7 @@ Chọn file theo nhu cầu (có thể upload cả 4, Claude tự chọn skill th
 | `youtube-knowledge-vi.skill` | Cần bản thuần tiếng Việt, dịch hết thuật ngữ |
 | `youtube-knowledge-en.skill` | Cần bản Full English Technical Reference |
 
-**Claude Code (terminal)**
+**Cài thủ công cho Claude Code (không qua marketplace)**
 
 ```bash
 # Toàn cục
@@ -118,7 +128,7 @@ cp -r skills/* .claude/skills/
 unzip packages/youtube-knowledge-vi-en-lite.skill -d ~/.claude/skills/
 ```
 
-**Cách dùng:** sau khi cài, gửi URL YouTube kèm yêu cầu, ví dụ `Học video này giúp mình: https://youtu.be/BV0hy6NET-U`. Muốn chọn đích danh một bản thì gọi tên skill, ví dụ `dùng youtube-knowledge-vi-en-lite cho video này`.
+**Cách dùng:** sau khi cài, gửi URL YouTube kèm yêu cầu, ví dụ `Học video này giúp mình: https://youtu.be/BV0hy6NET-U`. Claude tự chọn skill theo mô tả, chạy script lấy transcript rồi viết ghi chú (Markdown và HTML). Muốn chọn đích danh một bản thì gọi tên skill, ví dụ `dùng youtube-knowledge-vi-en-lite cho video này` (cài qua marketplace thì tên là `youtube-knowledge:youtube-knowledge-vi-en-lite`). Nếu không thấy skill chạy, khởi động lại phiên Claude Code hoặc chạy `/reload-plugins`.
 
 > **Lưu ý khi chạy trong Claude.ai / Cowork:** môi trường này không có trình duyệt nên không có cookie Chrome. Hãy chạy script với `--cookies-from-browser none`; nếu YouTube vẫn chặn, hãy dán transcript cho Claude để làm tiếp.
 
