@@ -1,0 +1,14 @@
+{
+  "name": "youtube-knowledge-skills",
+  "description": "Skills that turn YouTube videos into Vietnamese / English knowledge notes",
+  "owner": {
+    "name": "Ngoc-Anh"
+  },
+  "plugins": [
+    {
+      "name": "youtube-knowledge",
+      "source": "./",
+      "description": "Four skills that turn YouTube videos into deep Markdown + interactive HTML notes: vi-en-lite, vi-en (bilingual), vi, en."
+    }
+  ]
+}

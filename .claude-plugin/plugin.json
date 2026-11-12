@@ -1,0 +1,14 @@
+{
+  "name": "youtube-knowledge",
+  "displayName": "YouTube Knowledge Skills",
+  "version": "2.3.0",
+  "description": "Turn YouTube videos into deep Markdown + interactive HTML knowledge notes. Four editions: Vietnamese + English mixed (lite), two-part bilingual, pure Vietnamese, and pure English.",
+  "author": {
+    "name": "Ngoc-Anh",
+    "url": "https://github.com/maingocanh1702"
+  },
+  "homepage": "https://github.com/maingocanh1702/youtube-knowledge-skills",
+  "repository": "https://github.com/maingocanh1702/youtube-knowledge-skills",
+  "license": "MIT",
+  "keywords": ["youtube", "transcript", "notes", "vietnamese", "english", "bilingual", "knowledge", "summary"]
+}

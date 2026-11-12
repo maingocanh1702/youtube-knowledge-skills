@@ -31,6 +31,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added `packages/youtube-knowledge-en-v1.0.2.skill` and refreshed `packages/youtube-knowledge-en.skill`.
 - **Expanded Test Suite**: 27 unit tests in `skills/youtube-knowledge-vi-en/scripts/test_build_bilingual_html.py` covering inline math conversion, sub-accordion TOC generation, and bilingual assembly.
 
+### Added
+- **Claude plugin marketplace**: `.claude-plugin/plugin.json` (plugin `youtube-knowledge`, v2.3.0) and `.claude-plugin/marketplace.json` (marketplace `youtube-knowledge-skills`), so the four skills install with `/plugin install youtube-knowledge --marketplace maingocanh1702/youtube-knowledge-skills`. Passes `claude plugin validate --strict`.
+- README: a "What the plugin runs and accesses" section (network, browser cookies, files written, CDN assets).
+
 ### Changed
 - README (`README.md`, `README.en.md`): expanded the Claude install section with a table of which `.skill` file to upload, an `unzip` install option for Claude Code, and a short usage example.
 - README: removed the "recommended" label from the Google Antigravity IDE install option, added the lite package to the `.skill` list, and made the license note in the credits neutral.

@@ -73,7 +73,20 @@ cp -r skills/* .agents/skills/
 
 ### Cách 2: Dùng cho Claude
 
-Các skill đã được chuẩn hóa frontmatter (`name`, `description`, `metadata`) để vượt qua bộ kiểm tra của Claude.
+Các skill đã được chuẩn hóa frontmatter (`name`, `description`, `metadata`) để vượt qua bộ kiểm tra của Claude. Repo này cũng là một **plugin marketplace**, nên cài được cả 4 skill bằng một lệnh.
+
+**Cài qua marketplace (Claude Code)**
+
+```bash
+# Một bước (Claude Code v2.1.275 trở lên)
+/plugin install youtube-knowledge --marketplace maingocanh1702/youtube-knowledge-skills
+
+# Hoặc hai bước từ shell
+claude plugin marketplace add maingocanh1702/youtube-knowledge-skills
+claude plugin install youtube-knowledge@youtube-knowledge-skills
+```
+
+Cập nhật bản mới: `claude plugin update youtube-knowledge@youtube-knowledge-skills`. Plugin gồm đủ 4 skill (`youtube-knowledge-vi-en-lite`, `-vi-en`, `-vi`, `-en`); khi gọi đích danh, tên có tiền tố plugin, ví dụ `youtube-knowledge:youtube-knowledge-vi-en-lite`.
 
 **Claude.ai / Claude Desktop / Cowork**
 
@@ -133,6 +146,16 @@ Các file đóng gói sẵn nằm trong thư mục [`packages/`](packages/):
 * 📦 [`packages/youtube-knowledge-vi-en-lite.skill`](packages/youtube-knowledge-vi-en-lite.skill) *(Bản Lite, Việt trộn Anh)*
 
 Giải nén hoặc kéo thả vào thư mục `skills` của trợ lý AI bạn đang sử dụng.
+
+---
+
+## 🔒 Plugin Chạy Gì Và Truy Cập Gì
+
+- **Chạy cục bộ:** các script Python trong `skills/*/scripts/` (lấy transcript, biên dịch Markdown sang HTML). Không có hook, MCP server hay file thực thi nào khác.
+- **Mạng:** chỉ gọi tới YouTube để lấy phụ đề và metadata của video bạn đưa, qua `yt-dlp` và `youtube-transcript-api`.
+- **Cookie trình duyệt:** mặc định `--cookies-from-browser chrome` cho `yt-dlp` đọc cookie YouTube từ Chrome trên máy bạn để tránh lỗi 429. Cookie chỉ dùng cho request tới YouTube. Muốn tắt hẳn, chạy với `--cookies-from-browser none`.
+- **Ghi file:** chỉ vào thư mục `--out` (mặc định `knowledge/youtube`).
+- **File HTML sinh ra:** khi mở, tải font từ Google Fonts và Mermaid từ `cdn.jsdelivr.net`. Không gửi dữ liệu của bạn đi đâu.
 
 ---
 

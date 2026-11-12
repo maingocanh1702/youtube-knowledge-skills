@@ -65,7 +65,20 @@ Every platform below uses the same open format: **a skill folder with `SKILL.md`
 
 ### Option 1: Claude
 
-The skills use a Claude-compatible frontmatter (`name`, `description`, `metadata`).
+The skills use a Claude-compatible frontmatter (`name`, `description`, `metadata`). This repository is also a **plugin marketplace**, so one command installs all four skills.
+
+**Install from the marketplace (Claude Code)**
+
+```bash
+# One step (Claude Code v2.1.275 or later)
+/plugin install youtube-knowledge --marketplace maingocanh1702/youtube-knowledge-skills
+
+# Or two steps from your shell
+claude plugin marketplace add maingocanh1702/youtube-knowledge-skills
+claude plugin install youtube-knowledge@youtube-knowledge-skills
+```
+
+To get new versions: `claude plugin update youtube-knowledge@youtube-knowledge-skills`. The plugin contains all four skills (`youtube-knowledge-vi-en-lite`, `-vi-en`, `-vi`, `-en`); when you call one by name, the name carries the plugin prefix, for example `youtube-knowledge:youtube-knowledge-vi-en-lite`.
 
 **Claude.ai / Claude Desktop / Cowork**
 
@@ -150,6 +163,16 @@ Learn from this video for me: https://youtu.be/BV0hy6NET-U
 ```
 
 The agent should pick the right skill, run the transcript script and start writing the note. If nothing happens, check the folder location and restart the agent.
+
+---
+
+## 🔒 What the plugin runs and accesses
+
+- **Runs locally:** the Python scripts in `skills/*/scripts/` (fetch the transcript, compile Markdown to HTML). There are no hooks, MCP servers or other executables.
+- **Network:** only YouTube, to fetch subtitles and metadata for the video you give it, through `yt-dlp` and `youtube-transcript-api`.
+- **Browser cookies:** by default `--cookies-from-browser chrome` lets `yt-dlp` read your YouTube cookies from Chrome on your machine to avoid HTTP 429. The cookies are used only for requests to YouTube. To turn this off, run with `--cookies-from-browser none`.
+- **Files written:** only to the `--out` folder (default `knowledge/youtube`).
+- **Generated HTML:** when opened, it loads fonts from Google Fonts and Mermaid from `cdn.jsdelivr.net`. None of your data is sent anywhere.
 
 ---
 
