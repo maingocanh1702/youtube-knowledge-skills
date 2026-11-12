@@ -1,10 +1,11 @@
 # YouTube Knowledge Skills Suite 🎓
 
-[![Release](https://img.shields.io/badge/release-v2.2.0-blue.svg)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/release-v2.3.0-blue.svg)](CHANGELOG.md)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Interactive%20HTML-success.svg)](https://maingocanh1702.github.io/youtube-knowledge-skills/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Claude%20%7C%20Codex%20%7C%20Antigravity%20%7C%20AI%20Agents-green.svg)](#-installation)
 
-**🇬🇧 English** · [🇻🇳 Tiếng Việt](README.md)
+**🇬🇧 English** · [🇻🇳 Tiếng Việt](README.md) · 🌐 **[Live Demo](https://maingocanh1702.github.io/youtube-knowledge-skills/)**
 
 > **A set of AI agent skills that turn YouTube videos into deep technical and strategy knowledge notes, held to a fixed quality bar (the "Molly Graham Benchmark").**
 

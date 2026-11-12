@@ -1,12 +1,13 @@
 # YouTube Knowledge Skills Suite 🎓
 
-[![Release](https://img.shields.io/badge/release-v2.2.0-blue.svg)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/release-v2.3.0-blue.svg)](CHANGELOG.md)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Interactive%20HTML-success.svg)](https://maingocanh1702.github.io/youtube-knowledge-skills/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Claude%20%7C%20Codex%20%7C%20Antigravity%20%7C%20AI%20Agents-green.svg)](#-cài-đặt-installation)
 
 > **Bộ AI Agent Skills cao cấp biến video YouTube thành kho tri thức kỹ thuật & chiến lược chuyên sâu theo Tiêu Chuẩn Vàng (Molly Graham Benchmark).**
 
-[🇬🇧 English](README.en.md) · **🇻🇳 Tiếng Việt**
+[🇬🇧 English](README.en.md) · **🇻🇳 Tiếng Việt** · 🌐 **[Trải Nghiệm Live Demo](https://maingocanh1702.github.io/youtube-knowledge-skills/)**
 
 ---
 
