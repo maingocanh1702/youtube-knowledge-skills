@@ -2333,7 +2333,62 @@
       border-color: #059669;
     }
 
-  </style>
+      /* Hero Video Thumbnail */
+    .doc-hero-thumbnail {
+      margin: 24px 0 36px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      background: var(--surface-2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .doc-hero-thumbnail:hover {
+      box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+    }
+
+    .hero-thumb-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 1024 / 577;
+      object-fit: cover;
+    }
+
+    .hero-thumb-caption {
+      padding: 10px 16px;
+      font-size: 12px;
+      font-family: var(--font-mono, monospace);
+      color: var(--text-subtle);
+      background: var(--code-bg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-thumb-caption::before {
+      content: "🎬";
+      font-size: 13px;
+    }
+</style>
+  <!-- Open Graph & Social Sharing Metadata (Thumbnail) -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="YouTube Knowledge Skills">
+  <meta property="og:title" content="NVIDIA Spy Scandal Goes Deeper Than You Thought: Semiconductor Smuggling Geopolitics, The Singapore Conduit &amp; The Illusion of Zero China Revenue">
+  <meta property="og:description" content="In-depth bilingual forensic investigation on NVIDIA's illicit AI chip smuggling conduits, the Singapore transit hub, and DeepSeek's secret 50,000 H100 supercluster.">
+  <meta property="og:image" content="https://maingocanh1702.github.io/youtube-knowledge-skills/assets/nvidia-scandal-thumbnail.jpg">
+  <meta property="og:image:secure_url" content="https://maingocanh1702.github.io/youtube-knowledge-skills/assets/nvidia-scandal-thumbnail.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="577">
+  <meta property="og:url" content="https://maingocanh1702.github.io/youtube-knowledge-skills/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NVIDIA Spy Scandal Goes Deeper Than You Thought">
+  <meta name="twitter:description" content="Semiconductor Smuggling Geopolitics, The Singapore Conduit &amp; The Illusion of Zero China Revenue">
+  <meta name="twitter:image" content="https://maingocanh1702.github.io/youtube-knowledge-skills/assets/nvidia-scandal-thumbnail.jpg">
+  <link rel="image_src" href="https://maingocanh1702.github.io/youtube-knowledge-skills/assets/nvidia-scandal-thumbnail.jpg">
 </head>
 <body>
   <!-- Skip link for keyboard users -->
@@ -2393,6 +2448,15 @@
       </div>
     </div>
   </header>
+      <!-- Hero Video Thumbnail -->
+      <div class="doc-hero-thumbnail">
+        <img src="assets/nvidia-scandal-thumbnail.jpg" alt="NVIDIA Spy Scandal Goes Deeper Than You Thought: Semiconductor Smuggling Geopolitics" class="hero-thumb-img" loading="eager" decoding="async">
+        <div class="hero-thumb-caption">
+          <span class="vi-only">Ảnh bìa video: Đại án buôn lậu chip AI NVIDIA vào Trung Quốc qua cửa ngõ Singapore</span>
+          <span class="en-only">Video Thumbnail: NVIDIA's Alleged Chip Sales to China &amp; The Singapore Conduit</span>
+        </div>
+      </div>
+
 
   <!-- TOC drawer backdrop (mobile) -->
   <div class="toc-backdrop" onclick="closeToc()" aria-hidden="true"></div>
