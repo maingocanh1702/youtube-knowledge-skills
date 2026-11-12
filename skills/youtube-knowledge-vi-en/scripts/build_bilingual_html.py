@@ -445,7 +445,7 @@ def assemble_bilingual_document(
         "{{THEME_TOOLTIP}}": "Đổi giao diện / Theme",
         "{{CLOSE_LABEL}}": "Đóng / Close",
         "{{SKIP_LINK_LABEL}}": "Chuyển đến nội dung chính / Skip to main",
-        "{{FOOTER_NOTE}}": footer_note or f"Nguồn: YouTube Knowledge Learner — {source_file}",
+        "{{FOOTER_NOTE}}": footer_note or f'<span class="vi-only">Nguồn: YouTube Knowledge Learner — {source_file}</span><span class="en-only">Source: YouTube Knowledge Learner — {source_file}</span>',
     }
     for k, v in replacements.items():
         html = html.replace(k, v)
