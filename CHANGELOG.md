@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Expanded Test Suite**: 27 unit tests in `skills/youtube-knowledge-vi-en/scripts/test_build_bilingual_html.py` covering inline math conversion, sub-accordion TOC generation, and bilingual assembly.
 
 ### Changed
+- README (`README.md`, `README.en.md`): expanded the Claude install section with a table of which `.skill` file to upload, an `unzip` install option for Claude Code, and a short usage example.
 - README: removed the "recommended" label from the Google Antigravity IDE install option, added the lite package to the `.skill` list, and made the license note in the credits neutral.
 
 ## [v2.2.0] - 2026-10-08

@@ -81,6 +81,15 @@ Các skill đã được chuẩn hóa frontmatter (`name`, `description`, `metad
 2. Vào **Customize → Skills → `+` → Upload a skill**.
 3. Chọn file trong [`packages/`](packages/), mỗi lần một skill (nếu giao diện không nhận đuôi `.skill`, đổi đuôi thành `.zip`).
 
+Chọn file theo nhu cầu (có thể upload cả 4, Claude tự chọn skill theo mô tả):
+
+| File `.skill` | Dùng khi |
+|---|---|
+| `youtube-knowledge-vi-en-lite.skill` | Muốn bản gọn, tiếng Việt trộn thuật ngữ Anh, chạy nhẹ nhất trên Claude.ai / Cowork |
+| `youtube-knowledge-vi-en.skill` | Cần bản song ngữ 2 Part, HTML có nút đổi ngôn ngữ |
+| `youtube-knowledge-vi.skill` | Cần bản thuần tiếng Việt, dịch hết thuật ngữ |
+| `youtube-knowledge-en.skill` | Cần bản Full English Technical Reference |
+
 **Claude Code (terminal)**
 
 ```bash
@@ -91,7 +100,12 @@ cp -r skills/* ~/.claude/skills/
 # Hoặc cho riêng một dự án
 mkdir -p .claude/skills
 cp -r skills/* .claude/skills/
+
+# Hoặc giải nén trực tiếp từ file đóng gói (ví dụ bản lite)
+unzip packages/youtube-knowledge-vi-en-lite.skill -d ~/.claude/skills/
 ```
+
+**Cách dùng:** sau khi cài, gửi URL YouTube kèm yêu cầu, ví dụ `Học video này giúp mình: https://youtu.be/BV0hy6NET-U`. Muốn chọn đích danh một bản thì gọi tên skill, ví dụ `dùng youtube-knowledge-vi-en-lite cho video này`.
 
 > **Lưu ý khi chạy trong Claude.ai / Cowork:** môi trường này không có trình duyệt nên không có cookie Chrome. Hãy chạy script với `--cookies-from-browser none`; nếu YouTube vẫn chặn, hãy dán transcript cho Claude để làm tiếp.
 

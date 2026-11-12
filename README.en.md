@@ -73,6 +73,15 @@ The skills use a Claude-compatible frontmatter (`name`, `description`, `metadata
 2. Go to **Customize → Skills → `+` → Upload a skill**.
 3. Pick a file from [`packages/`](packages/), one skill at a time. If the dialog rejects the `.skill` extension, rename it to `.zip`.
 
+Which file to pick (you can upload all four; Claude chooses by each skill's description):
+
+| `.skill` file | Use it when |
+|---|---|
+| `youtube-knowledge-vi-en-lite.skill` | You want the compact Vietnamese + English mixed edition, the lightest option on Claude.ai / Cowork |
+| `youtube-knowledge-vi-en.skill` | You need the two-part bilingual edition with a language-toggle HTML |
+| `youtube-knowledge-vi.skill` | You need pure Vietnamese with all terms translated |
+| `youtube-knowledge-en.skill` | You need the full English technical reference |
+
 **Claude Code (terminal)**
 
 ```bash
@@ -83,7 +92,12 @@ cp -r skills/* ~/.claude/skills/
 # Or for one project only
 mkdir -p .claude/skills
 cp -r skills/* .claude/skills/
+
+# Or unzip straight from a packaged file (lite edition shown)
+unzip packages/youtube-knowledge-vi-en-lite.skill -d ~/.claude/skills/
 ```
+
+**Usage:** once installed, send a YouTube URL with a request, for example `Learn from this video for me: https://youtu.be/BV0hy6NET-U`. To pick one edition explicitly, name it, e.g. `use youtube-knowledge-vi-en-lite for this video`.
 
 > **Running inside Claude.ai / Cowork:** the sandbox has no browser, so there are no Chrome cookies. Run the script with `--cookies-from-browser none`. If YouTube still blocks the request, paste the transcript to Claude and continue from there.
 
